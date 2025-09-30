@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me - Aditya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="font-space overflow-x-hidden bg-slate-900 text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-6 left-6 md:top-8 md:left-8 flex gap-4 z-50 flex-col md:flex-row transition-all duration-500 ease-in-out" id="nav-buttons">
+      <a href="index.html" class="btn-secondary">← Back Home</a>
+      <a
+        href="https://github.com/adityasai1234"
+        target="_blank"
+        class="btn-primary flex items-center gap-2"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+          />
+        </svg>
+        View My Work
+      </a>
+    </nav>
+
+    <div class="min-h-screen py-20 px-8 md:px-16 lg:px-24">
+      <div class="container mx-auto max-w-6xl">
+        <!-- Header -->
+        <div class="text-center mb-16 pt-16">
+          <h1
+            class="text-5xl md:text-7xl font-orbitron font-black mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent"
+          >
+            About Me
+          </h1>
+          <p class="text-xl md:text-2xl text-blue-300 font-light">
+            Get to know the person behind the code
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+          <!-- About Text -->
+          <div class="space-y-8">
+            <div class="space-y-6">
+              <h2 class="text-3xl font-orbitron font-bold text-blue-300">
+                Hey there! 👋
+              </h2>
+              <p class="text-lg text-slate-300 leading-relaxed">
+                I'm Aditya, a passionate teenage software engineer who loves turning ideas into reality through code. 
+                I'm constantly learning new technologies and building projects that solve real-world problems.
+              </p>
+              <p class="text-lg text-slate-300 leading-relaxed">
+                When I'm not coding, you'll find me exploring the latest tech trends, contributing to open source, 
+                or working on my next big project. I believe in writing clean, efficient code and creating amazing user experiences.
+              </p>
+            </div>
+
+            <!-- Skills -->
+            <div class="space-y-4">
+              <h3 class="text-2xl font-space font-semibold text-blue-300">
+                What I Work With
+              </h3>
+              <div class="flex flex-wrap gap-3">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Swift</span>
+                <span class="skill-tag">Kotlin</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">Git</span>
+              </div>
+            </div>
+
+            <!-- Fun Facts -->
+            <div class="space-y-4">
+              <h3 class="text-2xl font-space font-semibold text-blue-300">
+                Fun Facts
+              </h3>
+              <ul class="space-y-2 text-slate-300">
+                <li class="flex items-center gap-3">
+                  <span class="text-blue-400">▸</span>
+                  Started coding as a teenager
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-blue-400">▸</span>
+                  Love building things that matter
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-blue-400">▸</span>
+                  Always learning something new
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-blue-400">▸</span>
+                  Open source enthusiast
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- GitHub Stats -->
+          <div class="space-y-8">
+            <h3 class="text-3xl font-orbitron font-bold text-blue-300 text-center">
+              GitHub Stats
+            </h3>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-slate-800 rounded-lg p-6 text-center border border-slate-700">
+                <div class="text-3xl font-bold text-blue-400" id="public-repos">-</div>
+                <div class="text-sm text-slate-400 mt-2">Public Repos</div>
+              </div>
+              <div class="bg-slate-800 rounded-lg p-6 text-center border border-slate-700">
+                <div class="text-3xl font-bold text-green-400" id="followers">-</div>
+                <div class="text-sm text-slate-400 mt-2">Followers</div>
+              </div>
+              <div class="bg-slate-800 rounded-lg p-6 text-center border border-slate-700">
+                <div class="text-3xl font-bold text-purple-400" id="following">-</div>
+                <div class="text-sm text-slate-400 mt-2">Following</div>
+              </div>
+              <div class="bg-slate-800 rounded-lg p-6 text-center border border-slate-700">
+                <div class="text-3xl font-bold text-yellow-400" id="total-stars">-</div>
+                <div class="text-sm text-slate-400 mt-2">Total Stars</div>
+              </div>
+            </div>
+
+            <!-- GitHub Stats Images -->
+            <div class="space-y-6">
+              <img 
+                src="https://github-readme-stats.vercel.app/api?username=adityasai1234&show_icons=true&theme=tokyonight&hide_border=true&bg_color=1e293b" 
+                alt="GitHub Stats" 
+                class="w-full rounded-lg"
+              />
+              <img 
+                src="https://github-readme-stats.vercel.app/api/top-langs/?username=adityasai1234&layout=compact&theme=tokyonight&hide_border=true&bg_color=1e293b" 
+                alt="Top Languages" 
+                class="w-full rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Fetch GitHub stats
+      async function fetchGitHubStats() {
+        try {
+          const response = await fetch("https://api.github.com/users/adityasai1234");
+          const data = await response.json();
+          
+          document.getElementById("public-repos").textContent = data.public_repos || 0;
+          document.getElementById("followers").textContent = data.followers || 0;
+          document.getElementById("following").textContent = data.following || 0;
+          
+          // Fetch repositories to calculate total stars
+          const reposResponse = await fetch("https://api.github.com/users/adityasai1234/repos");
+          const repos = await reposResponse.json();
+          const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+          document.getElementById("total-stars").textContent = totalStars;
+          
+        } catch (error) {
+          console.error("Error fetching GitHub stats:", error);
+        }
+      }
+
+      window.addEventListener("load", fetchGitHubStats);
+
+      let lastScrollTop = 0;
+      const navButtons = document.getElementById("nav-buttons");
+      let ticking = false;
+
+      function updateNavButtons() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 100) {
+          navButtons.style.opacity = "0";
+          navButtons.style.transform = "translateY(-20px)";
+          navButtons.style.pointerEvents = "none";
+        } else {
+          navButtons.style.opacity = "1";
+          navButtons.style.transform = "translateY(0)";
+          navButtons.style.pointerEvents = "auto";
+        }
+        
+        lastScrollTop = scrollTop;
+        ticking = false;
+      }
+
+      function requestTick() {
+        if (!ticking) {
+          requestAnimationFrame(updateNavButtons);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener("scroll", requestTick);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "aditya-portfolio",
+  "version": "1.0.0",
+  "description": "Aditya's Portfolio Website",
+  "scripts": {
+    "build-css": "npx tailwindcss -i ./tailwind.css -o ./styles.css --watch",
+    "build": "npx tailwindcss -i ./tailwind.css -o ./styles.css",
+    "dev": "npx tailwindcss -i ./tailwind.css -o ./styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
