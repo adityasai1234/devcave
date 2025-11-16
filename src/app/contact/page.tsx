@@ -2,7 +2,6 @@
 
 import { Container, Box, Heading, Text, VStack, HStack, Link } from '@chakra-ui/react'
 import { MotionBox } from '@/lib/motion'
-import ContactForm from '@/components/ui/ContactForm'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export default function ContactPage() {
@@ -40,8 +39,6 @@ export default function ContactPage() {
             </Text>
           </MotionBox>
 
-          <ContactForm />
-
           <MotionBox
             initial={prefersReducedMotion ? {} : { opacity: 0 }}
             animate={prefersReducedMotion ? {} : { opacity: 1 }}
@@ -50,7 +47,7 @@ export default function ContactPage() {
             pt={8}
           >
             <Text mb={4} color="text.muted" fontFamily="mono" fontSize="sm">
-              &gt; Or reach out directly:
+              &gt; Reach out directly:
             </Text>
             <HStack spacing={6} justify="center" flexWrap="wrap" fontFamily="mono" fontSize="sm">
               <Link
