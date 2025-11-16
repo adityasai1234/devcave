@@ -62,7 +62,7 @@ export default function Header() {
       backdropFilter="blur(10px)"
       initial={prefersReducedMotion ? {} : { y: -100 }}
       animate={prefersReducedMotion ? {} : { y: 0 }}
-      transition={{ duration: 0.3 }}
+      {...({ transition: { duration: 0.3 } } as any)}
     >
       <Flex
         maxW="1200px"

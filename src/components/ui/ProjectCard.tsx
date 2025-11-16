@@ -36,25 +36,26 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
+          {...({ transition: { duration: 0.5, delay: index * 0.1 } } as any)}
           as="article"
           bg="white"
-          _dark={{ bg: 'black' }}
+          _dark={{ bg: 'black', borderColor: 'white' }}
           border="1px solid"
           borderColor="black"
-          _dark={{ borderColor: 'white' }}
           overflow="hidden"
           cursor="pointer"
+          sx={{
+            transition: 'all 0.3s',
+          }}
           _hover={{ 
             borderColor: 'black', 
-            _dark: { borderColor: 'white' },
             transform: 'translateY(-4px)',
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
             _dark: {
+              borderColor: 'white',
               boxShadow: '0 4px 12px rgba(255, 255, 255, 0.1)',
             },
           }}
-          transition="all 0.3s"
           fontFamily="mono"
         >
       <VStack align="start" p={4} spacing={3}>

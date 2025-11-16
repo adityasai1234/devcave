@@ -55,7 +55,7 @@ export default function ProjectsPage() {
           <MotionBox
             initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
             animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            {...({ transition: { duration: 0.5 } } as any)}
             textAlign="center"
           >
             <Heading 
@@ -74,7 +74,7 @@ export default function ProjectsPage() {
               mx="auto"
               fontFamily="mono"
             >
-              &gt; Explore my work and see what I've been building
+              &gt; Explore my work and see what I&apos;ve been building
             </Text>
           </MotionBox>
 

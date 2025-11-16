@@ -63,7 +63,7 @@ export default function Hero() {
               textTransform="uppercase"
               letterSpacing="0.2em"
             >
-              &gt; Yo, i'm Aditya
+              &gt; Yo, i&apos;m Aditya
             </MotionHeading>
             <MotionText
               variants={prefersReducedMotion ? {} : itemVariants}
@@ -74,7 +74,7 @@ export default function Hero() {
             >
               &gt; A teenage software engineer
               <br />
-              &gt; BUILDING COOL THINGS USING CODE
+              &gt; Building intelligent, high performance digital experiences through machine learning, application development, and modern web engineering.
             </MotionText>
             <MotionBox
               variants={prefersReducedMotion ? {} : itemVariants}

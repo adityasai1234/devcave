@@ -53,7 +53,7 @@ export default function ContactForm() {
     <MotionBox
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      {...({ transition: { duration: 0.5 } } as any)}
       as="form"
       onSubmit={handleSubmit}
       maxW="600px"
@@ -70,10 +70,9 @@ export default function ContactForm() {
             onChange={handleChange}
             placeholder="your_name"
             bg="white"
-            _dark={{ bg: 'black' }}
+            _dark={{ bg: 'black', borderColor: 'white' }}
             border="1px solid"
             borderColor="black"
-            _dark={{ borderColor: 'white' }}
             borderRadius="0"
             fontFamily="mono"
             _focus={{ borderColor: 'black', _dark: { borderColor: 'white' }, boxShadow: 'none' }}
@@ -91,10 +90,9 @@ export default function ContactForm() {
             onChange={handleChange}
             placeholder="your.email@example.com"
             bg="white"
-            _dark={{ bg: 'black' }}
+            _dark={{ bg: 'black', borderColor: 'white' }}
             border="1px solid"
             borderColor="black"
-            _dark={{ borderColor: 'white' }}
             borderRadius="0"
             fontFamily="mono"
             _focus={{ borderColor: 'black', _dark: { borderColor: 'white' }, boxShadow: 'none' }}
@@ -112,10 +110,9 @@ export default function ContactForm() {
             placeholder="your message here..."
             rows={6}
             bg="white"
-            _dark={{ bg: 'black' }}
+            _dark={{ bg: 'black', borderColor: 'white' }}
             border="1px solid"
             borderColor="black"
-            _dark={{ borderColor: 'white' }}
             borderRadius="0"
             fontFamily="mono"
             _focus={{ borderColor: 'black', _dark: { borderColor: 'white' }, boxShadow: 'none' }}

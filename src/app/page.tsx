@@ -52,7 +52,7 @@ export default function Home() {
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              {...({ transition: { duration: 0.5 } } as any)}
               textAlign="center"
             >
               <Heading 
@@ -71,7 +71,7 @@ export default function Home() {
                 mx="auto"
                 fontFamily="mono"
               >
-                &gt; A selection of projects I've worked on
+                &gt; A selection of projects I&apos;ve worked on
                 <br />
                 &gt; Showcasing my skills and passion for building great software
               </Text>

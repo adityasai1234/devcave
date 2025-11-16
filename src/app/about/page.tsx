@@ -57,7 +57,7 @@ export default function AboutPage() {
           <MotionBox
             initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
             animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            {...(prefersReducedMotion ? {} : { transition: { duration: 0.5 } } as any)}
             textAlign="center"
           >
             <Heading
@@ -79,7 +79,7 @@ export default function AboutPage() {
               <MotionBox
                 initial={prefersReducedMotion ? {} : { opacity: 0, x: -20 }}
                 animate={prefersReducedMotion ? {} : { opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
+                {...({ transition: { duration: 0.5 } } as any)}
                 width="100%"
               >
                 <Heading
@@ -93,16 +93,16 @@ export default function AboutPage() {
                 </Heading>
                 <VStack align="start" spacing={4} color="text.primary" _dark={{ color: 'text.light' }} fontFamily="mono" fontSize="sm" lineHeight="1.8">
                   <Text>
-                    &gt; I'm Aditya, a passionate teenage software engineer who loves
+                    &gt; I&apos;m Aditya, a passionate teenage software engineer who loves
                     <br />
-                    &gt; turning ideas into reality through code. I'm constantly learning
+                    &gt; turning ideas into reality through code. I&apos;m constantly learning
                     <br />
                     &gt; new technologies and building projects that solve real-world
                     <br />
                     &gt; problems.
                   </Text>
                   <Text>
-                    &gt; When I'm not coding, you'll find me exploring the latest tech
+                    &gt; When I&apos;m not coding, you&apos;ll find me exploring the latest tech
                     <br />
                     &gt; trends, contributing to open source, or working on my next big
                     <br />
@@ -114,7 +114,7 @@ export default function AboutPage() {
               <MotionBox
                 initial={prefersReducedMotion ? {} : { opacity: 0, x: -20 }}
                 animate={prefersReducedMotion ? {} : { opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                {...({ transition: { duration: 0.5, delay: 0.2 } } as any)}
                 width="100%"
               >
                 <Heading
@@ -161,7 +161,7 @@ export default function AboutPage() {
               <MotionBox
                 initial={prefersReducedMotion ? {} : { opacity: 0, x: -20 }}
                 animate={prefersReducedMotion ? {} : { opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                {...({ transition: { duration: 0.5, delay: 0.3 } } as any)}
                 width="100%"
               >
                 <Heading
@@ -187,7 +187,7 @@ export default function AboutPage() {
               <MotionBox
                 initial={prefersReducedMotion ? {} : { opacity: 0, x: 20 }}
                 animate={prefersReducedMotion ? {} : { opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
+                {...({ transition: { duration: 0.5 } } as any)}
                 width="100%"
               >
                 <Heading

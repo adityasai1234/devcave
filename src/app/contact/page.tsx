@@ -15,7 +15,7 @@ export default function ContactPage() {
           <MotionBox
             initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
             animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            {...({ transition: { duration: 0.5 } } as any)}
             textAlign="center"
           >
             <Heading
@@ -34,7 +34,7 @@ export default function ContactPage() {
               mx="auto"
               fontFamily="mono"
             >
-              &gt; Let's connect and build something amazing together
+              &gt; Let&apos;s connect and build something amazing together
               <br />
               &gt; Always open to interesting conversations and collaboration
             </Text>
@@ -45,7 +45,7 @@ export default function ContactPage() {
           <MotionBox
             initial={prefersReducedMotion ? {} : { opacity: 0 }}
             animate={prefersReducedMotion ? {} : { opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            {...({ transition: { duration: 0.5, delay: 0.3 } } as any)}
             textAlign="center"
             pt={8}
           >
