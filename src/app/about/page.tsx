@@ -49,6 +49,8 @@ export default function AboutPage() {
     'I\'m always learning something new',
     'I\'m an open source enthusiast',
   ]
+  
+  const escapeApostrophes = (text: string) => text.replace(/'/g, '&apos;')
 
   return (
     <Box as="main" py={24}>
@@ -175,9 +177,7 @@ export default function AboutPage() {
                 </Heading>
                 <VStack align="start" spacing={2} fontFamily="mono" fontSize="sm" lineHeight="1.8">
                   {funFacts.map((fact, index) => (
-                    <Text key={index}>
-                      &gt; {index + 1}. {fact}
-                    </Text>
+                    <Text key={index} dangerouslySetInnerHTML={{ __html: `&gt; ${index + 1}. ${escapeApostrophes(fact)}` }} />
                   ))}
                 </VStack>
               </MotionBox>

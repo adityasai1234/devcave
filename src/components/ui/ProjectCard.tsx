@@ -44,9 +44,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           borderColor="black"
           overflow="hidden"
           cursor="pointer"
-          sx={{
-            transition: 'all 0.3s',
-          }}
           _hover={{ 
             borderColor: 'black', 
             transform: 'translateY(-4px)',
