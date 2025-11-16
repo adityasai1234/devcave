@@ -83,7 +83,6 @@ next-env.d.ts
 
 # Gatsby files
 .cache/
-public
 
 # Storybook build outputs
 .out
@@ -92,3 +91,4 @@ public
 # Temporary files
 *.tmp
 *.temp
+.vercel
