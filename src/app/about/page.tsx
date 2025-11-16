@@ -48,6 +48,7 @@ export default function AboutPage() {
     'I prefer coding at home over socializing',
     'I\'m always learning something new',
     'I\'m an open source enthusiast',
+    'Most of my repos are private due to personal reasons :(',
   ]
   
   const escapeApostrophes = (text: string) => text.replace(/'/g, '&apos;')

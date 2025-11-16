@@ -97,11 +97,24 @@ export default function ProjectsPage() {
           )}
 
           {!loading && !error && projects.length > 0 && (
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
-              {projects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
-              ))}
-            </SimpleGrid>
+            <>
+              <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
+                {projects.map((project, index) => (
+                  <ProjectCard key={project.id} project={project} index={index} />
+                ))}
+              </SimpleGrid>
+              <MotionBox
+                initial={prefersReducedMotion ? {} : { opacity: 0 }}
+                animate={prefersReducedMotion ? {} : { opacity: 1 }}
+                {...({ transition: { duration: 0.5, delay: 0.3 } } as any)}
+                textAlign="center"
+                pt={8}
+              >
+                <Text fontFamily="mono" color="text.muted" fontSize="sm">
+                  &gt; Most of my repos are private due to personal reasons :(
+                </Text>
+              </MotionBox>
+            </>
           )}
         </VStack>
       </Container>
