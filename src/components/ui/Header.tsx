@@ -105,21 +105,29 @@ export default function Header() {
         </NextLink>
 
         {isMobile ? (
-          <Menu>
-            <MenuButton
-              as={IconButton}
-              icon={<HamburgerIcon />}
+          <Flex gap={2} align="center">
+            <IconButton
+              icon={colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
+              onClick={toggleColorMode}
+              aria-label="Toggle color mode"
               variant="ghost"
-              aria-label="Navigation menu"
             />
-            <MenuList>
-              {navItems.map((item) => (
-                <NextLink key={item.href} href={item.href} passHref legacyBehavior>
-                  <MenuItem as={Link}>{item.label}</MenuItem>
-                </NextLink>
-              ))}
-            </MenuList>
-          </Menu>
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                icon={<HamburgerIcon />}
+                variant="ghost"
+                aria-label="Navigation menu"
+              />
+              <MenuList>
+                {navItems.map((item) => (
+                  <NextLink key={item.href} href={item.href} passHref legacyBehavior>
+                    <MenuItem as={Link}>{item.label}</MenuItem>
+                  </NextLink>
+                ))}
+              </MenuList>
+            </Menu>
+          </Flex>
         ) : (
           <Flex gap={6} align="center">
             {navItems.map((item) => (
