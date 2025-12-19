@@ -62,16 +62,14 @@ function SkillText({ children, position, fontSize }: SkillTextProps) {
 function Globe({ radius }: { radius: number }) {
   const groupRef = useRef<THREE.Group>(null);
 
-  // Auto-rotation
   useFrame((state, delta) => {
     if (groupRef.current) {
       groupRef.current.rotation.y += delta * 0.1;
     }
   });
 
-  // Calculate positions
   const skillPositions = useMemo(() => {
-    const phiSpan = Math.PI * (3 - Math.sqrt(5)); // Golden angle
+    const phiSpan = Math.PI * (3 - Math.sqrt(5));
 
     return SKILLS.map((skill, i) => {
       const y = 1 - (i / (SKILLS.length - 1)) * 2;
@@ -91,7 +89,6 @@ function Globe({ radius }: { radius: number }) {
 
   return (
     <group ref={groupRef}>
-      {/* Central Wireframe Sphere */}
       <mesh>
         <sphereGeometry args={[radius, 32, 32]} />
         <meshPhongMaterial
@@ -102,7 +99,6 @@ function Globe({ radius }: { radius: number }) {
         />
       </mesh>
 
-      {/* Internal Glow Light */}
       <pointLight
         position={[0, 0, 0]}
         intensity={3}
@@ -110,7 +106,6 @@ function Globe({ radius }: { radius: number }) {
         distance={radius * 1.5}
       />
 
-      {/* Skills Labels - Scale text relative to radius */}
       {skillPositions.map((item, idx) => (
         <SkillText key={idx} position={item.position} fontSize={radius * 0.05}>
           {item.skill}
@@ -121,21 +116,17 @@ function Globe({ radius }: { radius: number }) {
 }
 
 export default function SkillGlobe() {
-  const globeRadius = 11; // Defined centrally
-  // Camera Distance: closer relative to radius to fill screen
-  const cameraZ = globeRadius * 1.8; 
+  const globeRadius = 12;
+  const cameraZ = 16; 
 
   return (
     <div className="w-full h-full bg-black rounded-lg overflow-hidden relative">
       <Canvas>
-        <PerspectiveCamera makeDefault position={[0, 0, cameraZ]} fov={50} />
-        {/* Ambient Light */}
+        <PerspectiveCamera makeDefault position={[0, 0, cameraZ]} fov={75} />
         <ambientLight intensity={0.5} />
 
-        {/* The Globe */}
         <Globe radius={globeRadius} />
 
-        {/* Starfield Background */}
         <Stars
           radius={150}
           depth={50}
@@ -146,16 +137,14 @@ export default function SkillGlobe() {
           speed={1}
         />
 
-        {/* Orbit Controls (Zoom enabled) */}
         <OrbitControls 
           enableZoom={true} 
           autoRotate={false} 
           enablePan={false}
-          minDistance={globeRadius * 1.2} 
-          maxDistance={globeRadius * 3} 
+          minDistance={globeRadius * 1.05} 
+          maxDistance={globeRadius * 2} 
         />
 
-        {/* Post-Processing: Bloom */}
         <EffectComposer disableNormalPass={true} multisampling={0}>
           <Bloom
             luminanceThreshold={0.5}

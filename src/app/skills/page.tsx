@@ -28,7 +28,7 @@ export default function SkillsPage() {
           </MotionBox>
 
           <Box 
-            h="80vh" 
+            h="calc(100vh - 100px)" 
             w="full"  
             position="relative"
             bg="black" 
