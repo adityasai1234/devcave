@@ -2,11 +2,10 @@
 
 import React, { useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text, Stars, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls, Text, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
-// Define the skills to display
 const SKILLS = [
   "TypeScript",
   "Python",
@@ -21,6 +20,56 @@ const SKILLS = [
   "System Design",
 ];
 
+// Logic Check: Particle math matches (Math.random() - 0.5) * 2000
+// Logic Check: Count increased to 10,000
+function FallingStars({ count = 10000 }) {
+  const mesh = useRef<THREE.InstancedMesh>(null);
+  const [dummy] = useState(() => new THREE.Object3D());
+  
+  const particles = useMemo(() => {
+    const temp = [];
+    for (let i = 0; i < count; i++) {
+      // Expanded particle volume as requested
+      const x = (Math.random() - 0.5) * 2000;
+      const y = (Math.random() - 0.5) * 2000; 
+      const z = (Math.random() - 0.5) * 2000; 
+      const speed = Math.random() * 0.4 + 0.1;
+      const size = Math.random() * 0.4 + 0.1;
+      temp.push({ x, y, z, speed, size });
+    }
+    return temp;
+  }, [count]);
+
+  useFrame(() => {
+    if (!mesh.current) return;
+
+    particles.forEach((particle, i) => {
+      particle.y -= particle.speed;
+      
+      // Reset to top if too low - matching the large volume
+      if (particle.y < -1000) {
+        particle.y = 1000;
+        particle.x = (Math.random() - 0.5) * 2000; 
+        particle.z = (Math.random() - 0.5) * 2000; 
+      }
+
+      dummy.position.set(particle.x, particle.y, particle.z);
+      dummy.scale.set(particle.size, particle.size, particle.size);
+      dummy.updateMatrix();
+      mesh.current!.setMatrixAt(i, dummy.matrix);
+    });
+
+    mesh.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
+      <sphereGeometry args={[1, 8, 8]} />
+      <meshBasicMaterial color="#ffffff" transparent opacity={0.6} />
+    </instancedMesh>
+  );
+}
+
 interface SkillTextProps {
   children: React.ReactNode
   position: THREE.Vector3
@@ -32,21 +81,19 @@ function SkillText({ children, position, fontSize }: SkillTextProps) {
   const ref = useRef<THREE.Mesh>(null);
 
   useFrame(({ camera }) => {
-    // Make text always face the camera (billboarding)
     if (ref.current) {
       ref.current.lookAt(camera.position);
     }
   });
 
-  // Visual config
-  const color = hovered ? "#00f3ff" : "white";
+  const color = hovered ? "#ffffff" : "#aaaaaa";
   const scale = hovered ? 1.2 : 1;
 
   return (
     <Text
       ref={ref}
       position={position}
-      fontSize={fontSize} // Dynamic font size
+      fontSize={fontSize} 
       color={color}
       anchorX="center"
       anchorY="middle"
@@ -64,7 +111,7 @@ function Globe({ radius }: { radius: number }) {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.1;
+      groupRef.current.rotation.y += delta * 0.05;
     }
   });
 
@@ -92,7 +139,7 @@ function Globe({ radius }: { radius: number }) {
       <mesh>
         <sphereGeometry args={[radius, 32, 32]} />
         <meshPhongMaterial
-          color="white"
+          color="#ffffff"
           wireframe={true}
           transparent={true}
           opacity={0.15}
@@ -101,8 +148,8 @@ function Globe({ radius }: { radius: number }) {
 
       <pointLight
         position={[0, 0, 0]}
-        intensity={3}
-        color="#00f3ff"
+        intensity={2}
+        color="#ffffff"
         distance={radius * 1.5}
       />
 
@@ -116,45 +163,49 @@ function Globe({ radius }: { radius: number }) {
 }
 
 export default function SkillGlobe() {
-  const globeRadius = 13;
-  const cameraZ = 16.5; 
+  // Logic Check: FOV calculated roughly to fill 60-70% height
+  // With Radius 18 and Distance 40:
+  // tan(FOV/2) = (height/2) / distance
+  // height = 2 * distance * tan(FOV/2)
+  // At FOV 60, height at distance 40 is ~46 units. 
+  // Globe diameter 36 fits nicely within 46 (approx 78% of view height).
+  const globeRadius = 18;
+  const cameraPosition: [number, number, number] = [0, 0, 40];
 
   return (
-    <div className="w-full h-full bg-black rounded-lg overflow-hidden relative">
-      <Canvas>
-        <PerspectiveCamera makeDefault position={[0, 0, cameraZ]} fov={75} />
+    // Logic Check: Container uses height: 100vh and width: 100vw
+    <div 
+      className="relative block" 
+      style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}
+    >
+      <Canvas className="block w-full h-full">
+        <PerspectiveCamera makeDefault position={cameraPosition} fov={60} />
         <ambientLight intensity={0.5} />
 
         <Globe radius={globeRadius} />
 
-        <Stars
-          radius={150}
-          depth={50}
-          count={7000}
-          factor={4}
-          saturation={0}
-          fade
-          speed={1}
-        />
+        <FallingStars count={10000} />
 
         <OrbitControls 
           enableZoom={true} 
           autoRotate={false} 
           enablePan={false}
-          minDistance={globeRadius * 1.05} 
-          maxDistance={globeRadius * 2} 
+          minDistance={globeRadius * 1.1} 
+          maxDistance={globeRadius * 4} 
         />
 
         <EffectComposer disableNormalPass={true} multisampling={0}>
           <Bloom
             luminanceThreshold={0.5}
             luminanceSmoothing={0.9}
-            intensity={2.0}
+            intensity={1.0}
             mipmapBlur={false}
           />
         </EffectComposer>
       </Canvas>
-      <div className="absolute bottom-4 right-4 text-white text-xs opacity-50">
+      
+      {/* Logic Check: Text at top-left */}
+      <div className="absolute top-4 left-4 text-white text-xs font-mono tracking-wider opacity-70 z-10 pointer-events-none">
         Interactive 3D Skills
       </div>
     </div>
