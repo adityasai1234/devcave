@@ -79,10 +79,18 @@ export default function Hero() {
             <MotionBox
               variants={prefersReducedMotion ? {} : itemVariants}
               pt={4}
+              display="flex"
+              gap={4}
             >
               <NextLink href="/projects" passHref legacyBehavior>
                 <Button variant="primary" size="lg" as="a">
                   View My Work
+                </Button>
+              </NextLink>
+
+              <NextLink href="/skills" passHref legacyBehavior>
+                <Button variant="outline" size="lg" as="a">
+                  View Skills
                 </Button>
               </NextLink>
             </MotionBox>
@@ -95,6 +103,8 @@ export default function Hero() {
               alignItems="center"
               justifyContent="center"
               p={4}
+              w="100%"
+              h="600px" 
             >
             </MotionBox>
           )}

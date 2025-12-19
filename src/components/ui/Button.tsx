@@ -2,21 +2,17 @@
 
 import { Button as ChakraButton, ButtonProps } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { chakra, shouldForwardProp } from '@chakra-ui/react'
-import { isValidMotionProp } from 'framer-motion'
+import React from 'react'
 
-const MotionButton = chakra(motion.button, {
-  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
-})
+const MotionButton = motion(ChakraButton as any)
 
 interface CustomButtonProps extends ButtonProps {
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'secondary' | 'outline'
 }
 
 export default function Button({ children, variant = 'primary', ...props }: CustomButtonProps) {
   return (
     <MotionButton
-      as={ChakraButton}
       variant={variant}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -27,4 +23,3 @@ export default function Button({ children, variant = 'primary', ...props }: Cust
     </MotionButton>
   )
 }
-
