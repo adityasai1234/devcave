@@ -2,22 +2,22 @@
 
 import React, { useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls, Text, PerspectiveCamera, Image } from "@react-three/drei";
 import * as THREE from "three";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const SKILLS = [
-  "TypeScript",
-  "Python",
-  "Machine Learning",
-  "C++",
-  "React",
-  "Next.js",
-  "Tailwind",
-  "Three.js",
-  "Git",
-  "Node.js",
-  "System Design",
+  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "Machine Learning", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
+  { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+  { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+  { name: "Three.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
+  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "System Design", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
 ];
 
 // Logic Check: Particle math matches (Math.random() - 0.5) * 2000
@@ -70,19 +70,20 @@ function FallingStars({ count = 10000 }) {
   );
 }
 
-interface SkillTextProps {
+interface SkillItemProps {
   children: React.ReactNode
+  icon: string
   position: THREE.Vector3
   fontSize: number
 }
 
-function SkillText({ children, position, fontSize }: SkillTextProps) {
+function SkillItem({ children, icon, position, fontSize }: SkillItemProps) {
   const [hovered, setHovered] = useState(false);
-  const ref = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
 
   useFrame(({ camera }) => {
-    if (ref.current) {
-      ref.current.lookAt(camera.position);
+    if (groupRef.current) {
+      groupRef.current.lookAt(camera.position);
     }
   });
 
@@ -90,19 +91,31 @@ function SkillText({ children, position, fontSize }: SkillTextProps) {
   const scale = hovered ? 1.2 : 1;
 
   return (
-    <Text
-      ref={ref}
+    <group 
+      ref={groupRef} 
       position={position}
-      fontSize={fontSize} 
-      color={color}
-      anchorX="center"
-      anchorY="middle"
+      scale={[scale, scale, scale]}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      scale={[scale, scale, scale]}
     >
-      {children}
-    </Text>
+      <Image 
+        url={icon}
+        transparent
+        // @ts-ignore
+        scale={[2, 2]}
+        position={[0, 1.2, 0]}
+        color={hovered ? "#ffffff" : "#cccccc"}
+      />
+      <Text
+        position={[0, -0.5, 0]}
+        fontSize={fontSize} 
+        color={color}
+        anchorX="center"
+        anchorY="middle"
+      >
+        {children}
+      </Text>
+    </group>
   );
 }
 
@@ -118,7 +131,7 @@ function Globe({ radius }: { radius: number }) {
   const skillPositions = useMemo(() => {
     const phiSpan = Math.PI * (3 - Math.sqrt(5));
 
-    return SKILLS.map((skill, i) => {
+    return SKILLS.map((item, i) => {
       const y = 1 - (i / (SKILLS.length - 1)) * 2;
       const radiusAtY = Math.sqrt(1 - y * y);
       const theta = phiSpan * i;
@@ -128,7 +141,7 @@ function Globe({ radius }: { radius: number }) {
       const yPos = y * radius;
 
       return {
-        skill,
+        ...item,
         position: new THREE.Vector3(x, yPos, z),
       };
     });
@@ -154,9 +167,14 @@ function Globe({ radius }: { radius: number }) {
       />
 
       {skillPositions.map((item, idx) => (
-        <SkillText key={idx} position={item.position} fontSize={radius * 0.05}>
-          {item.skill}
-        </SkillText>
+        <SkillItem 
+          key={idx} 
+          position={item.position} 
+          icon={item.icon}
+          fontSize={radius * 0.05}
+        >
+          {item.name}
+        </SkillItem>
       ))}
     </group>
   );
