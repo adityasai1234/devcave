@@ -20,8 +20,7 @@ const SKILLS = [
   { name: "System Design", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
 ];
 
-// Logic Check: Particle math matches (Math.random() - 0.5) * 2000
-// Logic Check: Count increased to 10,000
+
 function FallingStars({ count = 10000 }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const [dummy] = useState(() => new THREE.Object3D());
@@ -105,6 +104,7 @@ function SkillItem({ children, icon, position, fontSize }: SkillItemProps) {
         scale={[2, 2]}
         position={[0, 1.2, 0]}
         color={hovered ? "#ffffff" : "#cccccc"}
+        alt="skill icon"
       />
       <Text
         position={[0, -0.5, 0]}
@@ -181,17 +181,12 @@ function Globe({ radius }: { radius: number }) {
 }
 
 export default function SkillGlobe() {
-  // Logic Check: FOV calculated roughly to fill 60-70% height
-  // With Radius 18 and Distance 40:
-  // tan(FOV/2) = (height/2) / distance
-  // height = 2 * distance * tan(FOV/2)
-  // At FOV 60, height at distance 40 is ~46 units. 
-  // Globe diameter 36 fits nicely within 46 (approx 78% of view height).
+  /* FOV 60 fills ~70% view height at distance 40 */
   const globeRadius = 18;
+
   const cameraPosition: [number, number, number] = [0, 0, 40];
 
   return (
-    // Logic Check: Container uses height: 100vh and width: 100vw
     <div 
       className="relative block" 
       style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}
@@ -222,7 +217,6 @@ export default function SkillGlobe() {
         </EffectComposer>
       </Canvas>
       
-      {/* Logic Check: Text at top-left */}
       <div className="absolute top-4 left-4 text-white text-xs font-mono tracking-wider opacity-70 z-10 pointer-events-none">
         Interactive 3D Skills
       </div>
