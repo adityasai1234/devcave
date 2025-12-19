@@ -7,13 +7,15 @@ import { MotionBox } from '@/lib/motion'
 
 export default function SkillsPage() {
   return (
-    <Box as="main" pt={24} pb={12} minH="100vh">
-      <Container maxW="1200px" h="full">
-        <VStack spacing={8} h="full" align="stretch">
+    <Box as="main" h="100vh" w="100vw" bg="black" overflow="hidden" display="flex" flexDirection="column">
+      <Container maxW="1400px" h="full" display="flex" flexDirection="column" pt={24} pb={4}>
+        <VStack spacing={0} h="full" align="stretch">
           <MotionBox
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             {...({ transition: { duration: 0.5 } } as any)}
+            flexShrink={0}
+            mb={6}
           >
             <Heading
               as="h1"
@@ -21,14 +23,14 @@ export default function SkillsPage() {
               fontFamily="mono"
               textTransform="uppercase"
               letterSpacing="0.2em"
-              mb={8}
+              color="white"
             >
               &gt; WHAT I WORK WITH
             </Heading>
           </MotionBox>
 
           <Box 
-            h="calc(100vh - 100px)" 
+            flex={1}
             w="full"  
             position="relative"
             bg="black" 

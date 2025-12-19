@@ -116,8 +116,8 @@ function Globe({ radius }: { radius: number }) {
 }
 
 export default function SkillGlobe() {
-  const globeRadius = 12;
-  const cameraZ = 16; 
+  const globeRadius = 13;
+  const cameraZ = 16.5; 
 
   return (
     <div className="w-full h-full bg-black rounded-lg overflow-hidden relative">
