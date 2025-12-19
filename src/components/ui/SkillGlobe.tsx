@@ -2,7 +2,7 @@
 
 import React, { useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text, Stars } from "@react-three/drei";
+import { OrbitControls, Text, Stars, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
@@ -24,9 +24,10 @@ const SKILLS = [
 interface SkillTextProps {
   children: React.ReactNode
   position: THREE.Vector3
+  fontSize: number
 }
 
-function SkillText({ children, position }: SkillTextProps) {
+function SkillText({ children, position, fontSize }: SkillTextProps) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<THREE.Mesh>(null);
 
@@ -45,7 +46,7 @@ function SkillText({ children, position }: SkillTextProps) {
     <Text
       ref={ref}
       position={position}
-      fontSize={0.25}
+      fontSize={fontSize} // Dynamic font size
       color={color}
       anchorX="center"
       anchorY="middle"
@@ -58,9 +59,8 @@ function SkillText({ children, position }: SkillTextProps) {
   );
 }
 
-function Globe() {
+function Globe({ radius }: { radius: number }) {
   const groupRef = useRef<THREE.Group>(null);
-  const radius = 3;
 
   // Auto-rotation
   useFrame((state, delta) => {
@@ -71,36 +71,16 @@ function Globe() {
 
   // Calculate positions
   const skillPositions = useMemo(() => {
-    const phiSpan = Math.PI * (3 - Math.sqrt(5)); // Golden angle for distribution
+    const phiSpan = Math.PI * (3 - Math.sqrt(5)); // Golden angle
 
     return SKILLS.map((skill, i) => {
-      // Distribute points evenly on a sphere (Fibonacci Sphere)
-      const y = 1 - (i / (SKILLS.length - 1)) * 2; // y goes from 1 to -1
+      const y = 1 - (i / (SKILLS.length - 1)) * 2;
       const radiusAtY = Math.sqrt(1 - y * y);
       const theta = phiSpan * i;
 
-      // We map this distribution to the User's formula convention:
-      // However, to keep Y as up in Three.js, we assume the user's "z = radius * cos(phi)"
-      // effectively meant "vertical axis". In Three.js, Y is vertical.
-      // So we will swap the user's Z formula to Y, and X/Y to X/Z for standard orientation.
-      // BUT, to strictly follow the prompt's request for the specific formula:
-      // x = r * sin(phi) * cos(theta)
-      // y = r * sin(phi) * sin(theta)
-      // z = r * cos(phi)
-      // This results in Z being the vertical pole.
-
-      // Let's use the standard even distribution math directly:
       const x = Math.cos(theta) * radiusAtY * radius;
       const z = Math.sin(theta) * radiusAtY * radius;
-      const yPos = y * radius; // This corresponds to 'z' in the user formula if we map vertical to Z
-
-      // The user wants the specific formula used.
-      // Let's interpret phi as the angle from the Y axis (0 to PI) for standard Three.js
-      // x = r sin(phi) cos(theta)
-      // z = r sin(phi) sin(theta)
-      // y = r cos(phi)
-      // This is the standard 3D graphics "Y-up" spherical coord system.
-      // I will proceed with this mapping to ensure the globe sits upright.
+      const yPos = y * radius;
 
       return {
         skill,
@@ -118,21 +98,21 @@ function Globe() {
           color="white"
           wireframe={true}
           transparent={true}
-          opacity={0.2}
+          opacity={0.15}
         />
       </mesh>
 
       {/* Internal Glow Light */}
       <pointLight
         position={[0, 0, 0]}
-        intensity={2}
+        intensity={3}
         color="#00f3ff"
         distance={radius * 1.5}
       />
 
-      {/* Skills Labels */}
+      {/* Skills Labels - Scale text relative to radius */}
       {skillPositions.map((item, idx) => (
-        <SkillText key={idx} position={item.position}>
+        <SkillText key={idx} position={item.position} fontSize={radius * 0.05}>
           {item.skill}
         </SkillText>
       ))}
@@ -141,31 +121,42 @@ function Globe() {
 }
 
 export default function SkillGlobe() {
+  const globeRadius = 11; // Defined centrally
+  // Camera Distance: closer relative to radius to fill screen
+  const cameraZ = globeRadius * 1.8; 
+
   return (
     <div className="w-full h-full bg-black rounded-lg overflow-hidden relative">
-      <Canvas camera={{ position: [0, 0, 7], fov: 60 }}>
+      <Canvas>
+        <PerspectiveCamera makeDefault position={[0, 0, cameraZ]} fov={50} />
         {/* Ambient Light */}
         <ambientLight intensity={0.5} />
 
         {/* The Globe */}
-        <Globe />
+        <Globe radius={globeRadius} />
 
         {/* Starfield Background */}
         <Stars
-          radius={100}
+          radius={150}
           depth={50}
-          count={5000}
+          count={7000}
           factor={4}
           saturation={0}
           fade
           speed={1}
         />
 
-        {/* Orbit Controls (No Zoom) */}
-        <OrbitControls enableZoom={false} autoRotate={false} />
+        {/* Orbit Controls (Zoom enabled) */}
+        <OrbitControls 
+          enableZoom={true} 
+          autoRotate={false} 
+          enablePan={false}
+          minDistance={globeRadius * 1.2} 
+          maxDistance={globeRadius * 3} 
+        />
 
         {/* Post-Processing: Bloom */}
-        <EffectComposer enableNormalPass={false} multisampling={0}>
+        <EffectComposer disableNormalPass={true} multisampling={0}>
           <Bloom
             luminanceThreshold={0.5}
             luminanceSmoothing={0.9}

@@ -28,8 +28,8 @@ export default function SkillsPage() {
           </MotionBox>
 
           <Box 
-            h="600px" 
-            w="full" 
+            h="80vh" 
+            w="full"  
             position="relative"
             bg="black" 
             rounded="xl" 
