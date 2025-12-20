@@ -97,6 +97,7 @@ function SkillItem({ children, icon, position, fontSize }: SkillItemProps) {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
+      {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <Image 
         url={icon}
         transparent
@@ -104,7 +105,6 @@ function SkillItem({ children, icon, position, fontSize }: SkillItemProps) {
         scale={[2, 2]}
         position={[0, 1.2, 0]}
         color={hovered ? "#ffffff" : "#cccccc"}
-        alt="skill icon"
       />
       <Text
         position={[0, -0.5, 0]}
