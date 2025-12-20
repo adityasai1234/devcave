@@ -1,7 +1,7 @@
 import { Providers } from './providers'
 import Layout from '@/components/ui/Layout'
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: '',
