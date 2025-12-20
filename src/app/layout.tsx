@@ -1,9 +1,11 @@
 import { Providers } from './providers'
 import Layout from '@/components/ui/Layout'
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata = {
-  title: 'Portfolio - Minimal 3D Website',
-  description: 'A minimalist 3D portfolio website built with Next.js',
+  title: '',
+  description: 'ikd why i made this',
 }
 
 export default function RootLayout({
@@ -17,6 +19,8 @@ export default function RootLayout({
         <Providers>
           <Layout>{children}</Layout>
         </Providers>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
