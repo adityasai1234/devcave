@@ -18,11 +18,11 @@ export interface UseWindowManagerReturn {
 }
 
 const initialWindows: WindowState[] = [
-  { id: 'about', zIndex: 100, isHidden: false, isMinimized: false },
-  { id: 'projects', zIndex: 101, isHidden: false, isMinimized: false },
+  { id: 'about', zIndex: 104, isHidden: false, isMinimized: false },
+  { id: 'projects', zIndex: 103, isHidden: false, isMinimized: false },
   { id: 'skills', zIndex: 102, isHidden: false, isMinimized: false },
-  { id: 'terminal', zIndex: 103, isHidden: false, isMinimized: false },
-  { id: 'contact', zIndex: 104, isHidden: true, isMinimized: false },
+  { id: 'terminal', zIndex: 101, isHidden: false, isMinimized: false },
+  { id: 'contact', zIndex: 100, isHidden: true, isMinimized: false },
 ]
 
 export function useWindowManager(): UseWindowManagerReturn {
