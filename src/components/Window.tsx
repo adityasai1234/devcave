@@ -32,25 +32,24 @@ export function Window({
 }: WindowProps) {
   const { position, isDragging, dragHandlers } = useDraggable({
     initialPosition: defaultPosition,
-    minY: 26,
+    minY: 32,
   })
 
   const { size, resizeHandleProps } = useResizable({
     initialSize: defaultSize,
   })
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     onFocus()
-  }, [zIndex])
+  }, [zIndex, onFocus])
 
   return (
     <AnimatePresence>
       {isMinimized ? null : (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.94, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.94, y: 8 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
           style={{
             position: 'absolute',
@@ -60,68 +59,58 @@ export function Window({
             height: size.height,
             zIndex,
           }}
-          className="flex flex-col bg-surface border rounded-md overflow-hidden"
+          className="flex flex-col window-frame"
           onClick={onFocus}
         >
           <div
             {...dragHandlers}
-            className={`
-              flex items-center h-6 px-2 border-b cursor-grab select-none
-              ${isDragging ? 'cursor-grabbing' : ''}
-            `}
-            style={{
-              borderColor: 'rgba(0, 255, 100, 0.12)',
-              backgroundColor: 'rgba(0, 0, 0, 0.2)',
-            }}
+            className={`flex items-center justify-between h-8 px-3 titlebar cursor-grab ${
+              isDragging ? 'cursor-grabbing' : ''
+            }`}
           >
-            <div className="flex items-center gap-1.5 mr-3">
+            <div className="flex items-center gap-1.5">
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   onClose()
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
-                className="w-3 h-3 rounded-full bg-red hover:brightness-110 transition"
-                style={{ backgroundColor: '#ff5f57' }}
+                className="w-3 h-3 rounded-full close-btn flex items-center justify-center"
                 aria-label="Close window"
-              />
+              >
+                <span className="close-icon">×</span>
+              </button>
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   onMinimize()
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
-                className="w-3 h-3 rounded-full hover:brightness-110 transition"
-                style={{ backgroundColor: '#febc2e' }}
+                className="w-3 h-3 rounded-full minimize-btn flex items-center justify-center"
                 aria-label="Minimize window"
-              />
+              >
+                <span className="minimize-icon">−</span>
+              </button>
               <button
                 onClick={(e) => e.stopPropagation()}
                 onPointerDown={(e) => e.stopPropagation()}
-                className="w-3 h-3 rounded-full hover:brightness-110 transition"
-                style={{ backgroundColor: '#28c840' }}
+                className="w-3 h-3 rounded-full maximize-btn flex items-center justify-center"
                 aria-label="Maximize window"
-              />
+              >
+                <span className="maximize-icon">+</span>
+              </button>
             </div>
-            <span
-              className="text-xs truncate"
-              style={{ color: 'rgba(0, 255, 100, 0.4)' }}
-            >
-              {title}
-            </span>
+            <span className="title-text">{title}</span>
+            <div className="w-10" />
           </div>
 
-          <div className="flex-1 overflow-auto">{children}</div>
+          <div className="flex-1 overflow-auto p-5 window-content">
+            {children}
+          </div>
 
           <div
             {...resizeHandleProps}
-            className="absolute bottom-0 right-0 w-3 h-3 cursor-se-resize"
-            style={{
-              backgroundImage:
-                'linear-gradient(135deg, rgba(0,255,100,0.3) 25%, transparent 25%), linear-gradient(225deg, rgba(0,255,100,0.3) 25%, transparent 25%)',
-              backgroundSize: '4px 4px',
-              backgroundPosition: '0 0, 2px 0',
-            }}
+            className="absolute bottom-0 right-0 w-3 h-3 resize-handle"
           />
         </motion.div>
       )}
