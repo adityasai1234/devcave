@@ -80,6 +80,8 @@ export function useTypewriterSequence({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout | null = null
+
     const runSequence = async () => {
       await new Promise((resolve) => setTimeout(resolve, initialDelay))
 
@@ -120,7 +122,6 @@ export function useTypewriterSequence({
     runSequence()
 
     return () => {
-      const timeoutId = timeoutRef.current
       if (timeoutId) {
         clearTimeout(timeoutId)
       }
