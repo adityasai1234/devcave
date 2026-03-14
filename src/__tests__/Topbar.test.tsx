@@ -5,20 +5,20 @@ describe('Topbar', () => {
   it('renders menu items', () => {
     render(<Topbar />)
     
-    expect(screen.getByText('file')).toBeInTheDocument()
-    expect(screen.getByText('view')).toBeInTheDocument()
-    expect(screen.getByText('tools')).toBeInTheDocument()
-    expect(screen.getByText('help')).toBeInTheDocument()
+    expect(screen.getByText('Finder')).toBeInTheDocument()
+    expect(screen.getByText('File')).toBeInTheDocument()
+    expect(screen.getByText('Edit')).toBeInTheDocument()
+    expect(screen.getByText('View')).toBeInTheDocument()
   })
 
-  it('renders logo text', () => {
+  it('renders Apple menu', () => {
     render(<Topbar />)
-    expect(screen.getByText('addy@arch')).toBeInTheDocument()
+    expect(screen.getByText('')).toBeInTheDocument()
   })
 
-  it('status dot is present', () => {
+  it('renders clock', () => {
     render(<Topbar />)
-    const statusDot = document.querySelector('.status-dot')
-    expect(statusDot).toBeInTheDocument()
+    const clock = document.querySelector('.clock')
+    expect(clock).toBeInTheDocument()
   })
 })

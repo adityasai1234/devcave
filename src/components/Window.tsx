@@ -32,7 +32,7 @@ export function Window({
 }: WindowProps) {
   const { position, isDragging, dragHandlers } = useDraggable({
     initialPosition: defaultPosition,
-    minY: 32,
+    minY: 38,
   })
 
   const { size, resizeHandleProps } = useResizable({
@@ -64,11 +64,11 @@ export function Window({
         >
           <div
             {...dragHandlers}
-            className={`flex items-center justify-between h-8 px-3 titlebar cursor-grab ${
+            className={`flex items-center justify-center h-[38px] px-4 titlebar cursor-grab ${
               isDragging ? 'cursor-grabbing' : ''
             }`}
           >
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2 absolute left-4">
               <button
                 onClick={(e) => {
                   e.stopPropagation()
@@ -101,7 +101,6 @@ export function Window({
               </button>
             </div>
             <span className="title-text">{title}</span>
-            <div className="w-10" />
           </div>
 
           <div className="flex-1 overflow-auto p-5 window-content">

@@ -14,7 +14,7 @@ describe('TerminalWindow', () => {
     render(<TerminalWindow onFocusWindow={jest.fn()} />)
     
     await waitFor(() => {
-      expect(screen.getByText(/aditya/)).toBeInTheDocument()
+      expect(screen.getByText(/addy/)).toBeInTheDocument()
     }, { timeout: 5000 })
   })
 })

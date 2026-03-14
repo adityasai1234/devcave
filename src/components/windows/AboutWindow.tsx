@@ -2,12 +2,14 @@
 
 import React from 'react'
 
-const asciiArt = `░█████╗░
-██╔══██╗
-██████╔╝
-██╔══██╗
-██║  ██║
-╚═╝  ╚═╝`
+const asciiArt = `       .:'
+     .:'
+   .:'
+   :'
+.___.
+|  |
+|  |
+|__|`
 
 export function AboutWindow() {
   return (
@@ -18,18 +20,23 @@ export function AboutWindow() {
           <div className="neofetch-header">
             <span className="cyan">addy</span>
             <span className="muted">@</span>
-            <span className="green">arch</span>
+            <span className="green">macbook</span>
           </div>
           <div className="muted">──────────────</div>
           <div className="neofetch-row">
             <span className="cyan">os</span>
             <span className="muted">:</span>
-            <span className="text">arch linux</span>
+            <span className="text">macOS Sonoma 14</span>
           </div>
           <div className="neofetch-row">
             <span className="cyan">age</span>
             <span className="muted">:</span>
             <span className="text">13 years young</span>
+          </div>
+          <div className="neofetch-row">
+            <span className="cyan">model</span>
+            <span className="muted">:</span>
+            <span className="text">MacBook Pro 14&quot;</span>
           </div>
           <div className="neofetch-row">
             <span className="cyan">role</span>
@@ -50,11 +57,6 @@ export function AboutWindow() {
             <span className="cyan">shell</span>
             <span className="muted">:</span>
             <span className="text">zsh + starship</span>
-          </div>
-          <div className="neofetch-row">
-            <span className="cyan">uptime</span>
-            <span className="muted">:</span>
-            <span className="text">13 years</span>
           </div>
         </div>
       </div>

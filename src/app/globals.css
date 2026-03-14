@@ -1,12 +1,12 @@
 :root {
-  --bg: #080c08;
-  --surface: #0d140d;
-  --surface2: #111a11;
-  --border: rgba(0, 255, 100, 0.1);
-  --border-focus: rgba(0, 255, 100, 0.38);
+  --bg: #1a1a1a;
+  --surface: #242424;
+  --surface2: #2d2d2d;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-focus: rgba(255, 255, 255, 0.25);
   --glow: rgba(0, 255, 100, 0.06);
-  --text: #e2ddd6;
-  --muted: rgba(0, 255, 100, 0.38);
+  --text: #e8e8e8;
+  --muted: rgba(255, 255, 255, 0.5);
   --green: #00ff64;
   --cyan: #5ec4e8;
   --yellow: #e8c46a;
@@ -15,8 +15,8 @@
   --yellow-btn: #febc2e;
   --green-btn: #28c840;
   --font: 'JetBrains Mono', monospace;
-  --radius: 8px;
-  --titlebar-h: 32px;
+  --radius: 10px;
+  --titlebar-h: 38px;
 }
 
 * {
@@ -33,39 +33,6 @@ body {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9998;
-  background-image:
-    linear-gradient(rgba(0, 255, 100, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 100, 0.03) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.07) 2px,
-    rgba(0, 0, 0, 0.07) 4px
-  );
 }
 
 ::selection {
@@ -171,77 +138,68 @@ body::after {
   top: 0;
   left: 0;
   right: 0;
-  height: 26px;
+  height: 28px;
   z-index: 8000;
-  background: rgba(8, 12, 8, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  padding: 0 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .topbar-left {
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.username {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--green);
+  gap: 20px;
+  flex: 1;
 }
 
 .topbar-menu {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .menu-item {
-  font-size: 10px;
-  color: var(--muted);
+  font-size: 13px;
+  color: #e8e8e8;
   background: none;
   border: none;
   cursor: pointer;
-  text-transform: lowercase;
+  font-weight: 400;
+}
+
+.menu-item:first-child {
+  font-size: 15px;
 }
 
 .menu-item:hover {
-  color: var(--green);
+  color: #fff;
 }
 
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
-.status-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 8px var(--green);
-  animation: pulse 2.5s ease-in-out infinite;
+.status-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.status-icon {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .clock {
-  font-size: 10px;
-  color: var(--muted);
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.2;
-  }
+  font-size: 13px;
+  color: #e8e8e8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .desktop-icon {
@@ -629,6 +587,10 @@ body::after {
 
 .red {
   color: var(--red-btn);
+}
+
+.blue {
+  color: #6cb6ff;
 }
 
 .contact-window {
