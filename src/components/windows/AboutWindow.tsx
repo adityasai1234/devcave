@@ -1,21 +1,15 @@
 'use client'
 
 import React from 'react'
-
-const asciiArt = `       .:'
-     .:'
-   .:'
-   :'
-.___.
-|  |
-|  |
-|__|`
+import { useAsciiRotation } from '@/hooks/useAsciiRotation'
 
 export function AboutWindow() {
+  const art = useAsciiRotation()
+
   return (
     <div className="about-window">
       <div className="about-columns">
-        <pre className="ascii-art">{asciiArt}</pre>
+        <pre className="ascii-art">{art}</pre>
         <div className="neofetch">
           <div className="neofetch-header">
             <span className="cyan">addy</span>
@@ -85,6 +79,7 @@ export function AboutWindow() {
           <span className="green">▸ </span>
           <span className="text">building things that matter</span>
         </div>
+        <div className="ascii-note">{'// font rotates daily'}</div>
       </div>
     </div>
   )

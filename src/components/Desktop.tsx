@@ -1,11 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Topbar } from '@/components/Topbar'
 import { Dock } from '@/components/Dock'
 import { DesktopIcon } from '@/components/DesktopIcon'
 import { Window } from '@/components/Window'
+import { SkillsRain } from '@/components/SkillsRain'
 import { useWindowManager, WindowState } from '@/hooks/useWindowManager'
 import { AboutWindow } from '@/components/windows/AboutWindow'
 import { ProjectsWindow } from '@/components/windows/ProjectsWindow'
@@ -55,6 +56,7 @@ const desktopIcons = [
 ]
 
 export function Desktop() {
+  const [skillsRainOpen, setSkillsRainOpen] = useState(false)
   const {
     windows,
     focusWindow,
@@ -68,6 +70,10 @@ export function Desktop() {
     focusWindow(windowId)
   }
 
+  const handleOpenSkillsRain = () => {
+    setSkillsRainOpen(true)
+  }
+
   const getWindowComponent = (id: string) => {
     switch (id) {
       case 'about':
@@ -77,7 +83,7 @@ export function Desktop() {
       case 'skills':
         return <SkillsWindow />
       case 'terminal':
-        return <TerminalWindow onFocusWindow={handleFocusTerminal} />
+        return <TerminalWindow onFocusWindow={handleFocusTerminal} onOpenSkillsRain={handleOpenSkillsRain} />
       case 'contact':
         return <ContactWindow />
       default:
@@ -162,6 +168,8 @@ export function Desktop() {
         onOpenWindow={openWindow}
         onRestoreWindow={restoreWindow}
       />
+
+      <SkillsRain isOpen={skillsRainOpen} onClose={() => setSkillsRainOpen(false)} />
     </div>
   )
 }

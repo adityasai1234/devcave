@@ -30,9 +30,10 @@ const fileSystem: FileSystem = {
 
 interface TerminalWindowProps {
   onFocusWindow: (id: string) => void
+  onOpenSkillsRain?: () => void
 }
 
-export function TerminalWindow({ onFocusWindow }: TerminalWindowProps) {
+export function TerminalWindow({ onFocusWindow, onOpenSkillsRain }: TerminalWindowProps) {
   const [lines, setLines] = useState<TerminalLine[]>([])
   const [input, setInput] = useState('')
   const [currentCommand, setCurrentCommand] = useState('')
@@ -121,6 +122,8 @@ export function TerminalWindow({ onFocusWindow }: TerminalWindowProps) {
             <span className="text">date</span> - Display date
             <br />
             <span className="text">echo [text]</span> - Display text
+            <br />
+            <span className="text">skills</span> - Launch skills matrix
           </span>
         )
 
@@ -286,6 +289,12 @@ export function TerminalWindow({ onFocusWindow }: TerminalWindowProps) {
 
       case 'echo':
         return <span className="text">{args.join(' ')}</span>
+
+      case 'skills':
+        if (onOpenSkillsRain) {
+          onOpenSkillsRain()
+        }
+        return <span className="muted">launching skills matrix...</span>
 
       default:
         return <span className="red">command not found: {cmd}</span>

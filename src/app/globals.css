@@ -330,10 +330,19 @@ body {
 }
 
 .ascii-art {
-  font-size: 9px;
-  line-height: 1.35;
+  font-size: 8px;
+  line-height: 1.3;
   color: var(--green);
   margin: 0;
+  white-space: pre;
+  user-select: none;
+  font-family: var(--font);
+}
+
+.ascii-note {
+  font-size: 8px;
+  color: var(--muted);
+  margin-top: 12px;
 }
 
 .neofetch {
@@ -645,4 +654,67 @@ body {
   .dock {
     display: none;
   }
+}
+
+.skills-rain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.skills-rain-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.skill-pill {
+  position: absolute;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transform-origin: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.skill-name {
+  font-family: var(--font);
+}
+
+.skill-tooltip {
+  position: absolute;
+  top: 100%;
+  margin-top: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border-focus);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 9px;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.dismiss-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  opacity: 0.5;
 }
