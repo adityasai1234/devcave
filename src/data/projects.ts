@@ -8,56 +8,36 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'accelerate-c',
+    name: 'Accelerate-C',
+    description: 'C language learning platform with interactive exercises and progress tracking',
+    tags: [
+      { label: 'next.js', color: 'cyan' },
+      { label: 'typescript', color: 'cyan' },
+      { label: 'react', color: 'cyan' },
+    ],
+    url: 'https://github.com/adityasai1234/Accelerate-C',
+  },
+  {
     id: 'crash-signal',
     name: 'Crash-Signal',
-    description: 'Real-time crash analytics & monitoring system',
+    description: 'real-time crash analytics & monitoring system with websocket alerts',
     tags: [
       { label: 'next.js', color: 'cyan' },
       { label: 'rust', color: 'orange' },
       { label: 'websocket', color: 'yellow' },
     ],
-    url: 'https://github.com/adityasai1234/crash-signal',
+    url: 'https://github.com/adityasai1234/Crash-Signal',
   },
   {
-    id: 'dev-cave',
-    name: 'Dev-Cave',
-    description: 'Developer workspace management & automation',
-    tags: [
-      { label: 'typescript', color: 'cyan' },
-      { label: 'docker', color: 'yellow' },
-      { label: 'linux', color: 'orange' },
-    ],
-    url: 'https://github.com/adityasai1234/dev-cave',
-  },
-  {
-    id: 'neural-canvas',
-    name: 'Neural Canvas',
-    description: 'ML-powered creative coding environment',
-    tags: [
-      { label: 'python', color: 'yellow' },
-      { label: 'ml', color: 'cyan' },
-      { label: 'webgl', color: 'green' },
-    ],
-    url: 'https://github.com/adityasai1234/neural-canvas',
-  },
-  {
-    id: 'addyhacks',
+    id: 'addyhacks-xyz',
     name: 'addyhacks.xyz',
-    description: 'Personal portfolio & blog platform',
+    description: 'personal portfolio & blog — the site you are looking at right now',
     tags: [
       { label: 'next.js', color: 'cyan' },
       { label: 'typescript', color: 'cyan' },
       { label: 'tailwind', color: 'cyan' },
     ],
-    url: 'https://addyhacks.xyz',
+    url: 'https://github.com/adityasai1234',
   },
-]
-
-export const skills = [
-  { name: 'python', level: 92 },
-  { name: 'rust', level: 70 },
-  { name: 'ml/ai', level: 85 },
-  { name: 'react', level: 78 },
-  { name: 'linux', level: 88 },
-  { name: 'docker', level: 65 },
 ]
