@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Topbar } from '@/components/Topbar'
 import { Dock } from '@/components/Dock'
-import { DesktopIcon } from '@/components/DesktopIcon'
 import { Window } from '@/components/Window'
 import { SkillsRain } from '@/components/SkillsRain'
 import { useWindowManager, WindowState } from '@/hooks/useWindowManager'
@@ -47,14 +46,6 @@ const windowConfigs = {
   },
 }
 
-const desktopIcons = [
-  { id: 'about', icon: '~', label: 'about.sh' },
-  { id: 'projects', icon: '⌥', label: 'projects/' },
-  { id: 'skills', icon: 'λ', label: 'skills.cfg' },
-  { id: 'terminal', icon: '$', label: 'terminal' },
-  { id: 'contact', icon: '✉', label: 'contact.sh' },
-]
-
 export function Desktop() {
   const [skillsRainOpen, setSkillsRainOpen] = useState(false)
   const {
@@ -96,46 +87,6 @@ export function Desktop() {
       <Topbar />
 
       <main className="pt-[26px] h-full pb-14 md:pb-0">
-        <div className="absolute top-11 left-2 flex flex-col gap-1 md:hidden">
-          {desktopIcons.map((icon) => (
-            <DesktopIcon
-              key={icon.id}
-              id={icon.id}
-              icon={icon.icon}
-              label={icon.label}
-              onClick={() => {
-                const win = windows.find((w) => w.id === icon.id)
-                if (win?.isHidden || win?.isMinimized) {
-                  openWindow(icon.id)
-                } else {
-                  focusWindow(icon.id)
-                }
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="absolute top-11 left-[14px] hidden md:flex flex-col gap-5">
-          {desktopIcons.map((icon) => (
-            <DesktopIcon
-              key={icon.id}
-              id={icon.id}
-              icon={icon.icon}
-              label={icon.label}
-              onClick={() => {
-                const win = windows.find((w) => w.id === icon.id)
-                if (win?.isHidden) {
-                  openWindow(icon.id)
-                } else if (win?.isMinimized) {
-                  restoreWindow(icon.id)
-                } else {
-                  focusWindow(icon.id)
-                }
-              }}
-            />
-          ))}
-        </div>
-
         <AnimatePresence>
           {windows
             .filter((w) => !w.isHidden)
