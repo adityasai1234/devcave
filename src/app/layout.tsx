@@ -3,8 +3,13 @@ import { JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'addy@arch',
-  description: 'Personal portfolio - teenage engineer',
+  title: 'addy@arch — portfolio',
+  description: 'teenage engineer into ml, systems & web',
+  openGraph: {
+    title: 'addy@arch — portfolio',
+    description: 'teenage engineer into ml, systems & web',
+    type: 'website',
+  },
 }
 
 const jetbrainsMono = JetBrains_Mono({

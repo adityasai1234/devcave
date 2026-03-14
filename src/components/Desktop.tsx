@@ -17,31 +17,31 @@ const windowConfigs = {
   about: {
     title: 'about.sh',
     defaultPosition: { x: 72, y: 44 },
-    defaultSize: { width: 320, height: 220 },
+    defaultSize: { width: 340, height: 280 },
     component: AboutWindow,
   },
   projects: {
     title: '~/projects',
-    defaultPosition: { x: 410, y: 44 },
-    defaultSize: { width: 310, height: 280 },
+    defaultPosition: { x: 430, y: 44 },
+    defaultSize: { width: 330, height: 320 },
     component: ProjectsWindow,
   },
   skills: {
     title: 'skills.cfg',
-    defaultPosition: { x: 72, y: 320 },
-    defaultSize: { width: 270, height: 240 },
+    defaultPosition: { x: 72, y: 330 },
+    defaultSize: { width: 280, height: 260 },
     component: SkillsWindow,
   },
   terminal: {
     title: 'kitty — zsh',
-    defaultPosition: { x: 360, y: 330 },
-    defaultSize: { width: 300, height: 200 },
+    defaultPosition: { x: 380, y: 330 },
+    defaultSize: { width: 310, height: 220 },
     component: TerminalWindow,
   },
   contact: {
     title: 'contact.sh',
-    defaultPosition: { x: 500, y: 150 },
-    defaultSize: { width: 240, height: 160 },
+    defaultPosition: { x: 200, y: 160 },
+    defaultSize: { width: 260, height: 200 },
     component: ContactWindow,
   },
 }
@@ -109,7 +109,7 @@ export function Desktop() {
           ))}
         </div>
 
-        <div className="absolute top-11 left-2 hidden md:flex flex-col gap-1">
+        <div className="absolute top-11 left-[14px] hidden md:flex flex-col gap-5">
           {desktopIcons.map((icon) => (
             <DesktopIcon
               key={icon.id}
