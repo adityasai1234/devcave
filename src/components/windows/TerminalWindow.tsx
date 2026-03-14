@@ -15,106 +15,97 @@ interface TerminalWindowProps {
 export function TerminalWindow({ onFocusWindow }: TerminalWindowProps) {
   const [lines, setLines] = useState<TerminalLine[]>([])
   const [input, setInput] = useState('')
-  const [isTyping, setIsTyping] = useState(true)
   const [currentCommand, setCurrentCommand] = useState('')
+  const [showInput, setShowInput] = useState(false)
+  const [cursorVisible, setCursorVisible] = useState(true)
   const terminalRef = useRef<HTMLDivElement>(null)
 
-  const sequence = [
-    { cmd: 'whoami', output: 'aditya — teenage engineer' },
-    { cmd: 'cat links.txt', output: null, isLinks: true },
-    { cmd: 'echo $STATUS', output: 'open to collabs ✓', isStatus: true },
-  ]
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
+    const sequence = [
+      { cmd: 'whoami', output: 'aditya — teenage engineer & ml enthusiast' },
+      { cmd: 'cat links.txt', output: 'links' },
+      { cmd: 'echo $STATUS', output: 'open to collabs & internships ✓' },
+      { cmd: 'ls ./ml-interests/', output: 'ml_dir' },
+    ]
+
     let lineIndex = 0
     let charIndex = 0
 
-    const typeCommand = () => {
+    const typeCommand = async () => {
       if (lineIndex >= sequence.length) {
-        setIsTyping(false)
+        setShowInput(true)
         return
       }
 
       const current = sequence[lineIndex]
 
-      if (charIndex === 0) {
-        setCurrentCommand('')
-      }
-
-      if (charIndex < current.cmd.length) {
+      while (charIndex < current.cmd.length) {
         setCurrentCommand(current.cmd.slice(0, charIndex + 1))
         charIndex++
-        setTimeout(typeCommand, 80)
-      } else {
-        setTimeout(() => {
-          if (current.isLinks) {
-            setLines((prev) => [
-              ...prev,
-              { type: 'input', content: `$${current.cmd}` },
-              {
-                type: 'output',
-                content: (
-                  <span>
-                    <a
-                      href="https://github.com/adityasai1234"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline mx-1"
-                      style={{ color: 'rgba(0, 200, 255, 0.85)' }}
-                    >
-                      github
-                    </a>
-                    ·{' '}
-                    <a
-                      href="https://twitter.com/vectorspace21"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline mx-1"
-                      style={{ color: 'rgba(0, 200, 255, 0.85)' }}
-                    >
-                      twitter
-                    </a>
-                    ·{' '}
-                    <a
-                      href="mailto:adityasai3230@gmail.com"
-                      className="hover:underline mx-1"
-                      style={{ color: 'rgba(0, 200, 255, 0.85)' }}
-                    >
-                      mail
-                    </a>
-                  </span>
-                ),
-              },
-            ])
-          } else if (current.isStatus) {
-            setLines((prev) => [
-              ...prev,
-              { type: 'input', content: `$${current.cmd}` },
-              {
-                type: 'output',
-                content: (
-                  <span style={{ color: '#e8c46a' }}>{current.output}</span>
-                ),
-              },
-            ])
-          } else {
-            setLines((prev) => [
-              ...prev,
-              { type: 'input' as const, content: current.cmd },
-              { type: 'output' as const, content: current.output },
-            ])
-          }
-
-          lineIndex++
-          charIndex = 0
-          setCurrentCommand('')
-          setTimeout(typeCommand, 300)
-        }, 200)
+        await new Promise((r) => setTimeout(r, 55))
       }
+
+      await new Promise((r) => setTimeout(r, 400))
+
+      let output: React.ReactNode
+      switch (current.output) {
+        case 'links':
+          output = (
+            <span>
+              <a
+                href="https://github.com/adityasai1234"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="terminal-link"
+              >
+                github
+              </a>
+              {' · '}
+              <span className="cyan">twitter</span>
+              {' · '}
+              <span className="cyan">mail</span>
+            </span>
+          )
+          break
+        case 'open to collabs & internships ✓':
+          output = <span className="yellow">open to collabs & internships ✓</span>
+          break
+        case 'ml_dir':
+          output = (
+            <span>
+              <span className="muted">reinforcement-learning/</span>
+              <br />
+              <span className="muted">computer-vision/</span>
+              <br />
+              <span className="muted">llm-finetuning/</span>
+            </span>
+          )
+          break
+        default:
+          output = <span className="green">{current.output}</span>
+      }
+
+      setLines((prev) => [
+        ...prev,
+        { type: 'input', content: '$ ' + current.cmd },
+        { type: 'output', content: output },
+      ])
+
+      setCurrentCommand('')
+      lineIndex++
+      charIndex = 0
+
+      setTimeout(typeCommand, 200)
     }
 
-    typeCommand()
+    setTimeout(typeCommand, 600)
+  }, [])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCursorVisible((v) => !v)
+    }, 500)
+    return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {
@@ -133,13 +124,13 @@ export function TerminalWindow({ onFocusWindow }: TerminalWindowProps) {
       case 'help':
         output = (
           <span>
-            available commands:{' '}
-            <span style={{ color: '#00ff64' }}>help</span>,{' '}
-            <span style={{ color: '#00ff64' }}>clear</span>,{' '}
-            <span style={{ color: '#00ff64' }}>open projects</span>,{' '}
-            <span style={{ color: '#00ff64' }}>open about</span>,{' '}
-            <span style={{ color: '#00ff64' }}>open skills</span>,{' '}
-            <span style={{ color: '#00ff64' }}>open contact</span>
+            <span className="green">whoami</span> ·{' '}
+            <span className="green">ls</span> ·{' '}
+            <span className="green">cat</span> ·{' '}
+            <span className="green">clear</span> ·{' '}
+            <span className="green">open</span> ·{' '}
+            <span className="green">neofetch</span> ·{' '}
+            <span className="green">uname -a</span>
           </span>
         )
         break
@@ -147,76 +138,98 @@ export function TerminalWindow({ onFocusWindow }: TerminalWindowProps) {
         setLines([])
         setInput('')
         return
-      case 'open projects':
-        onFocusWindow('projects')
-        output = <span style={{ color: '#00ff64' }}>opening projects...</span>
-        break
       case 'open about':
         onFocusWindow('about')
-        output = <span style={{ color: '#00ff64' }}>opening about...</span>
+        output = <span className="green">opening about...</span>
+        break
+      case 'open projects':
+        onFocusWindow('projects')
+        output = <span className="green">opening projects...</span>
         break
       case 'open skills':
         onFocusWindow('skills')
-        output = <span style={{ color: '#00ff64' }}>opening skills...</span>
+        output = <span className="green">opening skills...</span>
         break
       case 'open contact':
         onFocusWindow('contact')
-        output = <span style={{ color: '#00ff64' }}>opening contact...</span>
+        output = <span className="green">opening contact...</span>
+        break
+      case 'neofetch':
+        output = (
+          <span>
+            <span className="cyan">addy</span>
+            <span className="muted">@</span>
+            <span className="green">arch</span>
+            <br />
+            <span className="muted">─────────────────</span>
+            <br />
+            <span className="cyan">os</span>{' '}
+            <span className="muted">:</span>{' '}
+            <span className="text">arch linux</span>
+            <br />
+            <span className="cyan">age</span>{' '}
+            <span className="muted">:</span>{' '}
+            <span className="text">13 years young</span>
+          </span>
+        )
+        break
+      case 'uname -a':
+        output = (
+          <span className="text">
+            Linux addy-pc 6.x.x-arch1 #1 SMP PREEMPT x86_64 GNU/Linux
+          </span>
+        )
         break
       case '':
         break
       default:
         output = (
           <span>
-            command not found:{' '}
-            <span style={{ color: '#ff5f57' }}>{cmd}</span>
+            <span className="red">command not found: </span>
+            {cmd}
           </span>
         )
     }
 
     setLines((prev): TerminalLine[] => [
       ...prev,
-      { type: 'input' as const, content: `$ ${input}` },
+      { type: 'input', content: `$ ${input}` },
       ...(output ? [{ type: 'output' as const, content: output }] : []),
     ])
     setInput('')
   }
 
   return (
-    <div
-      ref={terminalRef}
-      className="p-2 text-xs h-full overflow-auto font-mono"
-      style={{ color: '#e8e4dc', backgroundColor: '#0a0e0a' }}
-    >
+    <div ref={terminalRef} className="terminal-window">
       {lines.map((line, i) => (
-        <div key={i} className="whitespace-pre-wrap">
+        <div key={i} className="terminal-line">
           {line.content}
         </div>
       ))}
-      {isTyping ? (
-        <div>
-          <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>$</span>{' '}
-          <span>{currentCommand}</span>
-          <motion.span
-            animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.5, repeat: Infinity }}
-            style={{ color: '#00ff64' }}
-          >
-            █
-          </motion.span>
-        </div>
-      ) : (
-        <div className="flex items-center">
-          <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>$</span>
+      {showInput ? (
+        <div className="terminal-input-line">
+          <span className="cyan">addy@arch</span>
+          <span className="muted">:</span>
+          <span className="yellow">~</span>
+          <span className="muted">$ </span>
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleCommand}
-            className="flex-1 bg-transparent border-none outline-none ml-1"
-            style={{ color: '#e8e4dc' }}
+            className="terminal-input"
             autoFocus
           />
+          {cursorVisible && <span className="cursor">█</span>}
+        </div>
+      ) : (
+        <div className="terminal-input-line">
+          <span className="cyan">addy@arch</span>
+          <span className="muted">:</span>
+          <span className="yellow">~</span>
+          <span className="muted">$ </span>
+          <span>{currentCommand}</span>
+          {cursorVisible && <span className="cursor">█</span>}
         </div>
       )}
     </div>

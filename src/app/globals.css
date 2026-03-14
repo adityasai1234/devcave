@@ -434,3 +434,253 @@ body::after {
   display: flex;
   gap: 4px;
 }
+
+.projects-window {
+  font-size: 10px;
+}
+
+.projects-header {
+  margin-bottom: 14px;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.project-item {
+  display: block;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-item:hover .project-name {
+  color: var(--green);
+}
+
+.project-name {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.project-desc {
+  font-size: 10px;
+  color: var(--muted);
+  margin: 3px 0 7px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid;
+}
+
+.tag-cyan {
+  color: var(--cyan);
+  border-color: rgba(94, 196, 232, 0.3);
+}
+
+.tag-orange {
+  color: var(--orange);
+  border-color: rgba(232, 124, 78, 0.3);
+}
+
+.tag-yellow {
+  color: var(--yellow);
+  border-color: rgba(232, 196, 106, 0.3);
+}
+
+.tag-green {
+  color: var(--green);
+  border-color: var(--border);
+}
+
+.projects-footer {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.github-link {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.github-link:hover {
+  text-decoration: underline;
+}
+
+.skills-window {
+  font-size: 10px;
+}
+
+.skills-comment {
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-name {
+  width: 72px;
+  font-size: 10px;
+  color: var(--cyan);
+}
+
+.skill-bar-track {
+  flex: 1;
+  height: 3px;
+  background: rgba(0, 255, 100, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 2px;
+}
+
+.skill-percent {
+  width: 32px;
+  text-align: right;
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.skills-divider {
+  border-bottom: 1px solid var(--border);
+  margin: 14px 0;
+}
+
+.learning-section {
+  font-size: 10px;
+}
+
+.learning-comment {
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.learning-item {
+  display: flex;
+  gap: 4px;
+}
+
+.terminal-window {
+  font-size: 10px;
+  line-height: 1.9;
+  padding: 8px;
+  overflow-y: auto;
+}
+
+.terminal-line {
+  white-space: pre-wrap;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font: inherit;
+}
+
+.terminal-link {
+  color: var(--cyan);
+  text-decoration: underline;
+}
+
+.cursor {
+  color: var(--green);
+}
+
+.red {
+  color: var(--red-btn);
+}
+
+.contact-window {
+  font-size: 10px;
+}
+
+.contact-header {
+  margin-bottom: 8px;
+}
+
+.contact-divider {
+  color: var(--muted);
+  margin: 8px 0;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.contact-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+  color: var(--cyan);
+}
+
+.contact-footer {
+  margin-top: 8px;
+}
+
+.availability {
+  color: var(--yellow);
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .desktop-icon {
+    display: none;
+  }
+
+  .dock {
+    display: none;
+  }
+}
