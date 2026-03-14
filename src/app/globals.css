@@ -279,3 +279,84 @@ body::after {
   max-width: 48px;
   text-align: center;
 }
+
+.dock {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8000;
+  background: rgba(5, 10, 5, 0.75);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.dock-items {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.dock-item-wrapper {
+  position: relative;
+}
+
+.dock-item {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  background: rgba(0, 255, 100, 0.04);
+  border-radius: 6px;
+  font-size: 15px;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.dock-item:hover {
+  background: rgba(0, 255, 100, 0.1);
+}
+
+.dock-item.active {
+  background: rgba(0, 255, 100, 0.08);
+}
+
+.minimized-indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.dock-separator {
+  width: 1px;
+  height: 22px;
+  background: var(--border);
+  align-self: center;
+  margin: 0 4px;
+}
+
+.dock-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 9px;
+  color: var(--text);
+  white-space: nowrap;
+  pointer-events: none;
+}
