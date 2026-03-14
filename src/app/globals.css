@@ -1,15 +1,22 @@
 :root {
-  --bg: #0a0e0a;
+  --bg: #080c08;
   --surface: #0d140d;
-  --border: rgba(0, 255, 100, 0.12);
-  --border-focus: rgba(0, 255, 100, 0.35);
-  --text: #e8e4dc;
-  --muted: rgba(0, 255, 100, 0.4);
+  --surface2: #111a11;
+  --border: rgba(0, 255, 100, 0.1);
+  --border-focus: rgba(0, 255, 100, 0.38);
+  --glow: rgba(0, 255, 100, 0.06);
+  --text: #e2ddd6;
+  --muted: rgba(0, 255, 100, 0.38);
   --green: #00ff64;
-  --cyan: rgba(0, 200, 255, 0.85);
+  --cyan: #5ec4e8;
   --yellow: #e8c46a;
-  --red: #ff5f57;
-  --orange: #ff9f0a;
+  --orange: #e87c4e;
+  --red-btn: #ff5f57;
+  --yellow-btn: #febc2e;
+  --green-btn: #28c840;
+  --font: 'JetBrains Mono', monospace;
+  --radius: 8px;
+  --titlebar-h: 32px;
 }
 
 * {
@@ -20,7 +27,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font);
   background: var(--bg);
   color: var(--text);
   overflow: hidden;
@@ -36,7 +43,7 @@ body::before {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 9998;
   background-image:
     linear-gradient(rgba(0, 255, 100, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 100, 0.03) 1px, transparent 1px);
@@ -51,13 +58,13 @@ body::after {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 9998;
+  z-index: 9999;
   background: repeating-linear-gradient(
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.08) 2px,
-    rgba(0, 0, 0, 0.08) 4px
+    rgba(0, 0, 0, 0.07) 2px,
+    rgba(0, 0, 0, 0.07) 4px
   );
 }
 
@@ -76,14 +83,14 @@ body::after {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 100, 0.2);
+  background: rgba(0, 255, 100, 0.18);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 100, 0.4);
+  background: rgba(0, 255, 100, 0.32);
 }
 
 .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font);
 }
