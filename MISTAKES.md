@@ -47,6 +47,25 @@ setLines((prev): TerminalLine[] => [
 - Jest tests were written but require proper SWC binary installation to run
 - The test environment needs `@next/swc-darwin-arm64` for macOS ARM
 - Tests cover: useWindowManager, useDraggable, Window component, TerminalWindow, ProjectsWindow, Topbar
+- Switched from babel-jest to @swc/jest for better macOS compatibility
+- Added @swc/core and @swc/jest dependencies
+
+### 6. Jest Config for macOS
+
+**Problem:** Jest failed to run on macOS due to SWC binary issues.
+
+**Fix:** Installed `@swc/core` and `@swc/jest`, configured Jest to use SWC transform:
+```javascript
+transform: {
+  '^.+\\.(js|jsx|ts|tsx)$': ['@swc/jest', {...}],
+}
+```
+
+### 7. Topbar styled-jsx Warning
+
+**Problem:** `<style jsx>` caused React warnings in tests.
+
+**Fix:** Changed to `<style jsx global>` to properly inject global styles.
 
 ## Potential Improvements
 
