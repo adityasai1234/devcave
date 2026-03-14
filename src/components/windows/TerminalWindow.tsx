@@ -218,9 +218,38 @@ export function TerminalWindow({ onFocusWindow }: TerminalWindowProps) {
       case 'neofetch':
         return (
           <span>
+            <pre style={{ margin: 0, display: 'inline', color: '#00ff64' }}>
+{`('-.     
+  ( OO ).-. 
+  / . --. / 
+  | \\-.  \\  
+.-'-'  |  | 
+ \\| |_.'  | 
+  |  .-.  | 
+  |  | |  | 
+  \`--' \`--' `}
+            </pre>
             <span className="cyan">addy</span>
             <span className="muted">@</span>
             <span className="green">macbook</span>
+            <br />
+            <span className="muted">─────────────────</span>
+            <br />
+            <span className="cyan">os</span>{' '}
+            <span className="muted">:</span>{' '}
+            <span className="text">macOS Sonoma 14</span>
+            <br />
+            <span className="cyan">host</span>{' '}
+            <span className="muted">:</span>{' '}
+            <span className="text">MacBook Pro 14&quot;</span>
+            <br />
+            <span className="cyan">kernel</span>{' '}
+            <span className="muted">:</span>{' '}
+            <span className="text">Darwin 23.0.0</span>
+            <br />
+            <span className="cyan">shell</span>{' '}
+            <span className="muted">:</span>{' '}
+            <span className="text">zsh</span>
             <br />
             <span className="muted">─────────────────</span>
             <br />
