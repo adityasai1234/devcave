@@ -1,20 +1,37 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./*.html", "./**/*.html"],
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     extend: {
+      colors: {
+        bg: '#0a0e0a',
+        surface: '#0d140d',
+        border: 'rgba(0, 255, 100, 0.12)',
+        'border-focus': 'rgba(0, 255, 100, 0.35)',
+        text: '#e8e4dc',
+        muted: 'rgba(0, 255, 100, 0.4)',
+        green: '#00ff64',
+        cyan: 'rgba(0, 200, 255, 0.85)',
+        yellow: '#e8c46a',
+        red: '#ff5f57',
+        orange: '#ff9f0a',
+      },
       fontFamily: {
-        orbitron: ["Orbitron", "monospace"],
-        space: ["Space Grotesk", "sans-serif"],
+        mono: ['JetBrains Mono', 'monospace'],
       },
-      animation: {
-        "fade-in-up": "fadeInUp 1s ease-out",
-        "bounce-slow": "bounce 2s infinite",
+      fontSize: {
+        '2xs': '10px',
+        xs: '11px',
+        sm: '12px',
       },
-      backgroundImage: {
-        "hero-gradient": "linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0e4b99 100%)",
+      spacing: {
+        '2.5': '10px',
       },
     },
   },
   plugins: [],
-};
+}

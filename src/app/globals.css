@@ -1,0 +1,89 @@
+:root {
+  --bg: #0a0e0a;
+  --surface: #0d140d;
+  --border: rgba(0, 255, 100, 0.12);
+  --border-focus: rgba(0, 255, 100, 0.35);
+  --text: #e8e4dc;
+  --muted: rgba(0, 255, 100, 0.4);
+  --green: #00ff64;
+  --cyan: rgba(0, 200, 255, 0.85);
+  --yellow: #e8c46a;
+  --red: #ff5f57;
+  --orange: #ff9f0a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background-image:
+    linear-gradient(rgba(0, 255, 100, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 100, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
+::selection {
+  background: rgba(0, 255, 100, 0.3);
+  color: var(--text);
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 100, 0.2);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 100, 0.4);
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}

@@ -1,12 +1,16 @@
-import { Providers } from './providers'
-import Layout from '@/components/ui/Layout'
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/next"
+import type { Metadata } from 'next'
+import { JetBrains_Mono } from 'next/font/google'
+import './globals.css'
 
-export const metadata = {
-  title: '',
-  description: 'ikd why i made this',
+export const metadata: Metadata = {
+  title: 'addy@arch',
+  description: 'Personal portfolio - teenage engineer',
 }
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+})
 
 export default function RootLayout({
   children,
@@ -15,14 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body style={{ fontFamily: "'Courier New', 'Courier', monospace" }}>
-        <Providers>
-          <Layout>{children}</Layout>
-        </Providers>
-        <SpeedInsights />
-        <Analytics />
+      <body className={`${jetbrainsMono.variable} font-mono`}>
+        {children}
       </body>
     </html>
   )
 }
-
