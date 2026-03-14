@@ -22,8 +22,8 @@ interface UseResizableReturn {
 
 export function useResizable({
   initialSize,
-  minWidth = 150,
-  minHeight = 100,
+  minWidth = 220,
+  minHeight = 120,
 }: UseResizableOptions): UseResizableReturn {
   const [size, setSize] = useState<Size>(initialSize)
   const [isResizing, setIsResizing] = useState(false)

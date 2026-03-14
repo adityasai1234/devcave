@@ -9,6 +9,8 @@ interface UseDraggableOptions {
   initialPosition: Position
   minY?: number
   minX?: number
+  maxX?: number
+  maxY?: number
 }
 
 interface UseDraggableReturn {
@@ -22,8 +24,10 @@ interface UseDraggableReturn {
 
 export function useDraggable({
   initialPosition,
-  minY = 26,
-  minX = 0,
+  minY = 32,
+  minX = 60,
+  maxX = typeof window !== 'undefined' ? window.innerWidth - 20 : 1000,
+  maxY = typeof window !== 'undefined' ? window.innerHeight - 20 : 800,
 }: UseDraggableOptions): UseDraggableReturn {
   const [position, setPosition] = useState<Position>(initialPosition)
   const [isDragging, setIsDragging] = useState(false)
@@ -69,8 +73,8 @@ export function useDraggable({
     const handleMouseMove = (e: MouseEvent) => {
       const deltaX = e.clientX - dragRef.current.startX
       const deltaY = e.clientY - dragRef.current.startY
-      const newX = Math.max(minX, dragRef.current.startPosX + deltaX)
-      const newY = Math.max(minY, dragRef.current.startPosY + deltaY)
+      const newX = Math.min(Math.max(minX, dragRef.current.startPosX + deltaX), maxX)
+      const newY = Math.min(Math.max(minY, dragRef.current.startPosY + deltaY), maxY)
       setPosition({ x: newX, y: newY })
     }
 
@@ -79,8 +83,8 @@ export function useDraggable({
       const touch = e.touches[0]
       const deltaX = touch.clientX - dragRef.current.startX
       const deltaY = touch.clientY - dragRef.current.startY
-      const newX = Math.max(minX, dragRef.current.startPosX + deltaX)
-      const newY = Math.max(minY, dragRef.current.startPosY + deltaY)
+      const newX = Math.min(Math.max(minX, dragRef.current.startPosX + deltaX), maxX)
+      const newY = Math.min(Math.max(minY, dragRef.current.startPosY + deltaY), maxY)
       setPosition({ x: newX, y: newY })
     }
 
@@ -99,7 +103,7 @@ export function useDraggable({
       window.removeEventListener('touchmove', handleTouchMove)
       window.removeEventListener('touchend', handleEnd)
     }
-  }, [isDragging, minX, minY])
+  }, [isDragging, minX, minY, maxX, maxY])
 
   return {
     position,
