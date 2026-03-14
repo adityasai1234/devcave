@@ -120,8 +120,9 @@ export function useTypewriterSequence({
     runSequence()
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
+      const timeoutId = timeoutRef.current
+      if (timeoutId) {
+        clearTimeout(timeoutId)
       }
     }
   }, [sequence, initialDelay, outputDelay, charDelay])
