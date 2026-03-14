@@ -360,3 +360,77 @@ body::after {
   white-space: nowrap;
   pointer-events: none;
 }
+
+.about-window {
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.about-columns {
+  display: flex;
+  gap: 16px;
+}
+
+.ascii-art {
+  font-size: 9px;
+  line-height: 1.35;
+  color: var(--green);
+  margin: 0;
+}
+
+.neofetch {
+  flex: 1;
+}
+
+.neofetch-header {
+  font-size: 11px;
+}
+
+.neofetch-row {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+}
+
+.cyan {
+  color: var(--cyan);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.green {
+  color: var(--green);
+}
+
+.yellow {
+  color: var(--yellow);
+}
+
+.text {
+  color: var(--text);
+}
+
+.divider {
+  border-bottom: 1px solid var(--border);
+  margin: 14px 0;
+}
+
+.about-bottom {
+  font-size: 10px;
+}
+
+.command-line {
+  color: var(--muted);
+}
+
+.motto {
+  color: var(--muted);
+  font-style: italic;
+  margin: 4px 0 12px 0;
+}
+
+.interest {
+  display: flex;
+  gap: 4px;
+}

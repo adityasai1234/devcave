@@ -2,49 +2,87 @@
 
 import React from 'react'
 
-const asciiArt = `
-   A
-  A A
- AAAAA
-A     A
-`
+const asciiArt = `░█████╗░
+██╔══██╗
+██████╔╝
+██╔══██╗
+██║  ██║
+╚═╝  ╚═╝`
 
 export function AboutWindow() {
   return (
-    <div className="p-3 text-xs" style={{ color: '#e8e4dc' }}>
-      <div className="flex gap-4">
-        <pre
-          className="text-xs leading-tight"
-          style={{ color: '#00ff64', fontSize: '8px' }}
-        >
-          {asciiArt}
-        </pre>
-        <div className="flex-1">
-          <div style={{ color: '#00ff64' }}>addy@arch</div>
-          <div style={{ color: 'rgba(0, 255, 100, 0.2)' }}>─────────────</div>
-          <div className="grid grid-cols-[60px_1fr] gap-y-0.5 mt-1">
-            <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>os</span>
-            <span>: arch linux</span>
-            <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>role</span>
-            <span>: teenage engineer</span>
-            <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>focus</span>
-            <span>: ml · systems · web</span>
-            <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>editor</span>
-            <span>: neovim btw</span>
-            <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>shell</span>
-            <span>: zsh + starship</span>
-            <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>uptime</span>
-            <span>: 17 years</span>
+    <div className="about-window">
+      <div className="about-columns">
+        <pre className="ascii-art">{asciiArt}</pre>
+        <div className="neofetch">
+          <div className="neofetch-header">
+            <span className="cyan">addy</span>
+            <span className="muted">@</span>
+            <span className="green">arch</span>
+          </div>
+          <div className="muted">──────────────</div>
+          <div className="neofetch-row">
+            <span className="cyan">os</span>
+            <span className="muted">:</span>
+            <span className="text">arch linux</span>
+          </div>
+          <div className="neofetch-row">
+            <span className="cyan">age</span>
+            <span className="muted">:</span>
+            <span className="text">13 years young</span>
+          </div>
+          <div className="neofetch-row">
+            <span className="cyan">role</span>
+            <span className="muted">:</span>
+            <span className="text">teenage engineer</span>
+          </div>
+          <div className="neofetch-row">
+            <span className="cyan">focus</span>
+            <span className="muted">:</span>
+            <span className="text">ml · systems · web</span>
+          </div>
+          <div className="neofetch-row">
+            <span className="cyan">editor</span>
+            <span className="muted">:</span>
+            <span className="text">neovim btw</span>
+          </div>
+          <div className="neofetch-row">
+            <span className="cyan">shell</span>
+            <span className="muted">:</span>
+            <span className="text">zsh + starship</span>
+          </div>
+          <div className="neofetch-row">
+            <span className="cyan">uptime</span>
+            <span className="muted">:</span>
+            <span className="text">13 years</span>
           </div>
         </div>
       </div>
-      <div className="mt-3" style={{ color: 'rgba(0, 255, 100, 0.2)' }}>
-        ───────────────────
-      </div>
-      <div className="mt-2">
-        <span style={{ color: 'rgba(0, 255, 100, 0.4)' }}>$ cat motto.txt</span>
-        <br />
-        <span style={{ color: '#e8c46a' }}>&quot;ship fast, break prod, fix it at 2am&quot;</span>
+      <div className="divider" />
+      <div className="about-bottom">
+        <div className="command-line">
+          <span className="muted">$ </span>
+          <span className="text">cat motto.txt</span>
+        </div>
+        <div className="motto">
+          &quot;ship fast, break prod, fix it at 2am&quot;
+        </div>
+        <div className="command-line">
+          <span className="muted">$ </span>
+          <span className="text">cat interests.txt</span>
+        </div>
+        <div className="interest">
+          <span className="green">▸ </span>
+          <span className="text">machine learning & deep learning</span>
+        </div>
+        <div className="interest">
+          <span className="green">▸ </span>
+          <span className="text">systems programming</span>
+        </div>
+        <div className="interest">
+          <span className="green">▸ </span>
+          <span className="text">building things that matter</span>
+        </div>
       </div>
     </div>
   )
