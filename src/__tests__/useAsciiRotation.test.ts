@@ -3,36 +3,71 @@ import { useAsciiRotation } from '@/hooks/useAsciiRotation'
 import { asciiArtStyles } from '@/data/asciiArt'
 
 describe('useAsciiRotation', () => {
-  const originalGetDay = Date.prototype.getDay
+  const originalDate = global.Date
+
+  beforeEach(() => {
+    jest.useFakeTimers()
+  })
 
   afterEach(() => {
-    Date.prototype.getDay = originalGetDay
+    jest.useRealTimers()
+    global.Date = originalDate
   })
 
   it('returns a non-empty string', () => {
-    Date.prototype.getDay = jest.fn(() => 0)
+    jest.setSystemTime(new Date('2024-01-02T10:00:00'))
     const { result } = renderHook(() => useAsciiRotation())
     expect(result.current).toBeTruthy()
     expect(typeof result.current).toBe('string')
   })
 
-  it('Sunday (day 0) returns first entry', () => {
-    Date.prototype.getDay = jest.fn(() => 0)
-    const { result } = renderHook(() => useAsciiRotation())
-    expect(result.current).toBe(asciiArtStyles[0])
+  it('returns different art for different days', () => {
+    jest.setSystemTime(new Date('2024-01-02T10:00:00'))
+    const { result: day1 } = renderHook(() => useAsciiRotation())
+    
+    jest.setSystemTime(new Date('2024-01-03T10:00:00'))
+    const { result: day2 } = renderHook(() => useAsciiRotation())
+    
+    expect(day1.current).not.toBe(day2.current)
   })
 
-  it('Saturday (day 6) returns last entry', () => {
-    Date.prototype.getDay = jest.fn(() => 6)
-    const { result } = renderHook(() => useAsciiRotation())
-    expect(result.current).toBe(asciiArtStyles[6])
+  it('rotates consecutively every day', () => {
+    jest.setSystemTime(new Date('2024-01-01T10:00:00'))
+    const { result: day0 } = renderHook(() => useAsciiRotation())
+    
+    jest.setSystemTime(new Date('2024-01-02T10:00:00'))
+    const { result: day1 } = renderHook(() => useAsciiRotation())
+    
+    jest.setSystemTime(new Date('2024-01-03T10:00:00'))
+    const { result: day2 } = renderHook(() => useAsciiRotation())
+    
+    jest.setSystemTime(new Date('2024-01-04T10:00:00'))
+    const { result: day3 } = renderHook(() => useAsciiRotation())
+    
+    expect(day0.current).toBe(asciiArtStyles[0])
+    expect(day1.current).toBe(asciiArtStyles[1])
+    expect(day2.current).toBe(asciiArtStyles[2])
+    expect(day3.current).toBe(asciiArtStyles[3])
   })
 
-  it('never returns undefined for any day 0-6', () => {
-    for (let day = 0; day <= 6; day++) {
-      Date.prototype.getDay = jest.fn(() => day)
-      const { result } = renderHook(() => useAsciiRotation())
-      expect(result.current).toBeDefined()
-    }
+  it('wraps around after all styles are used', () => {
+    const totalStyles = asciiArtStyles.length
+    
+    jest.setSystemTime(new Date('2024-01-01T10:00:00'))
+    const { result: first } = renderHook(() => useAsciiRotation())
+    
+    const futureDate = new Date('2024-01-01')
+    futureDate.setDate(futureDate.getDate() + totalStyles)
+    jest.setSystemTime(futureDate)
+    const { result: wrap } = renderHook(() => useAsciiRotation())
+    
+    expect(wrap.current).toBe(first.current)
+  })
+
+  it('never returns undefined', () => {
+    jest.setSystemTime(new Date('2024-01-02T10:00:00'))
+    const { result } = renderHook(() => useAsciiRotation())
+    expect(result.current).toBeDefined()
+    expect(asciiArtStyles).toContain(result.current)
   })
 })

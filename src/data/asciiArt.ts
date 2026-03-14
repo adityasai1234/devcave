@@ -1,63 +1,42 @@
 export const asciiArtStyles: string[] = [
-  // Sunday - ANSI Shadow
-  `░█████╗░
-██╔══██╗
-██████╔╝
-██╔══██╗
-██║  ██║
-╚═╝  ╚═╝`,
+  // Style 1
+  `___  
+ / _ \\ 
+/ /_\\ \\
+|  _  |
+| | | |
+\\_| |_/`,
 
-  // Monday - Block
-  ` █████  
-██   ██ 
-███████ 
-██   ██ 
-██   ██ `,
+  // Style 2
+  `____ 
+ /    |
+|  o  |
+|     |
+|  _  |
+|  |  |
+|__|__|`,
 
-  // Tuesday - Doom style
-  ` ______  
-/\\  _  \\ 
-\\ \\ \\_\\ \\
- \\ \\  __ \\
-  \\ \\ \\/\\ \\
-   \\ \\_/\\_\\
-    \\/_/\\/_/`,
+  // Style 3
+  `▞▀▖
+▙▄▌
+▌ ▌
+▘ ▘`,
 
-  // Wednesday - Slant
-  `    ___   
-   /   |  
-  / /| |  
- / ___ | 
-/_/  |_|`,
-
-  // Thursday - 3D
-  `  ___    
- /\\  \\   
-/::\\  \\  
-/:/\\:\\  \\
-\\:\\~\\:\\  \\
- \\:\\ \\:\\__\\
-  \\:\\/:/  /
-   \\::/__/ 
-    \\__\\  `,
-
-  // Friday - Cyberlarge
-  `  _____ 
- /  _  \\
-/  /_\\  \\
-/    |    \\
-\\____|__  /
-        \\/ `,
-
-  // Saturday - Banner3
-  ` .d8888b.
-d88P  Y88b
-888    888
-888    
-888    
-888    888
-Y88b  d88P
- "Y8888P" `,
+  // Style 4 - SSS
+  `.S_SSSs    
+.SS~SSSSS   
+S%S   SSSS  
+S%S    S%S  
+S%S SSSS%S  
+S&S  SSS%S  
+S&S    S&S  
+S&S    S&S  
+S*S    S&S  
+S*S    S*S  
+S*S    S*S  
+SSS    S*S  
+       SP   
+       Y`,
 ]
 
 export const skillTooltips: Record<string, string> = {
