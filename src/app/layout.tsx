@@ -1,13 +1,17 @@
 import type { Metadata } from 'next'
 import { JetBrains_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'addy@arch — portfolio',
-  description: 'teenage engineer into ml, systems & web',
+  title: 'getomnism',
+  description:
+    'Facial microexpressions. YC and a16z backed startups on the waitlist.',
   openGraph: {
-    title: 'addy@arch — portfolio',
-    description: 'teenage engineer into ml, systems & web',
+    title: 'getomnism',
+    description:
+      'Facial microexpressions. YC and a16z backed startups on the waitlist.',
+    url: 'https://getomnism.xyz',
     type: 'website',
   },
 }
@@ -26,6 +30,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${jetbrainsMono.variable} font-mono`}>
         {children}
+        <Analytics />
       </body>
     </html>
   )
