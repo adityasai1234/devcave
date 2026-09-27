@@ -12,30 +12,30 @@ export const stackRows: StackRow[] = [
   {
     label: 'os',
     items: [
-      { name: 'arch linux', icon: 'https://cdn.simpleicons.org/archlinux/888888' },
-      { name: 'mac', icon: 'https://cdn.simpleicons.org/apple/888888' },
+      { name: 'arch linux', icon: 'https://cdn.simpleicons.org/archlinux/a1a1aa' },
+      { name: 'mac', icon: 'https://cdn.simpleicons.org/apple/a1a1aa' },
     ],
   },
   {
     label: 'editor',
     items: [
-      { name: 'cursor', icon: 'https://cdn.simpleicons.org/cursor/888888' },
-      { name: 'nvim', icon: 'https://cdn.simpleicons.org/neovim/888888' },
+      { name: 'cursor', icon: 'https://cdn.simpleicons.org/cursor/a1a1aa' },
+      { name: 'nvim', icon: 'https://cdn.simpleicons.org/neovim/a1a1aa' },
     ],
   },
   {
     label: 'langs',
     items: [
-      { name: 'c', icon: 'https://cdn.simpleicons.org/c/888888' },
-      { name: 'c++', icon: 'https://cdn.simpleicons.org/cplusplus/888888' },
-      { name: 'python', icon: 'https://cdn.simpleicons.org/python/888888' },
-      { name: 'typescript', icon: 'https://cdn.simpleicons.org/typescript/888888' },
+      { name: 'c', icon: 'https://cdn.simpleicons.org/c/a1a1aa' },
+      { name: 'c++', icon: 'https://cdn.simpleicons.org/cplusplus/a1a1aa' },
+      { name: 'python', icon: 'https://cdn.simpleicons.org/python/a1a1aa' },
+      { name: 'typescript', icon: 'https://cdn.simpleicons.org/typescript/a1a1aa' },
     ],
   },
   {
     label: 'into',
     items: [
-      { name: 'ml', icon: 'https://cdn.simpleicons.org/pytorch/888888' },
+      { name: 'ml', icon: 'https://cdn.simpleicons.org/pytorch/a1a1aa' },
     ],
   },
 ]

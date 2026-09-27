@@ -4,13 +4,13 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'getomnism',
+  title: 'aditya',
   description:
-    'Facial microexpressions. YC and a16z backed startups on the waitlist.',
+    'Aditya. Research in facial microexpressions. Coding since 7.',
   openGraph: {
-    title: 'getomnism',
+    title: 'aditya',
     description:
-      'Facial microexpressions. YC and a16z backed startups on the waitlist.',
+      'Aditya. Research in facial microexpressions. Coding since 7.',
     url: 'https://getomnism.xyz',
     type: 'website',
   },
@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${jetbrainsMono.variable} font-mono`}>
+      <body className={jetbrainsMono.variable}>
         {children}
         <Analytics />
       </body>

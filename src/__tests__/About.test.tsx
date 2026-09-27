@@ -13,11 +13,11 @@ jest.mock('next/link', () => ({
 }))
 
 describe('About', () => {
-  it('renders title and playful project line', () => {
+  it('renders title and origin line', () => {
     render(<About />)
 
-    expect(screen.getByRole('heading', { name: 'about' })).toBeInTheDocument()
-    expect(screen.getByText(/487238929202 projects/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /yo im aditya/i })).toBeInTheDocument()
+    expect(screen.getByText(/i like to code\. started at 7/i)).toBeInTheDocument()
   })
 
   it('renders stack with logos', () => {
@@ -33,18 +33,16 @@ describe('About', () => {
     expect(document.querySelectorAll('.stack-icon').length).toBeGreaterThan(0)
   })
 
-  it('renders asl and research copy', () => {
+  it('renders research copy', () => {
     render(<About />)
 
-    expect(screen.getByText(/asl recognition pipeline/i)).toBeInTheDocument()
-    expect(screen.getByText(/96% accuracy/i)).toBeInTheDocument()
     expect(screen.getByText(/facial microexpressions/i)).toBeInTheDocument()
   })
 
   it('renders home back-link', () => {
     render(<About />)
 
-    expect(screen.getByRole('link', { name: '← home' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'home' })).toHaveAttribute(
       'href',
       '/'
     )

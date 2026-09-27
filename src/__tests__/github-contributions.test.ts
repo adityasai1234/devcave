@@ -34,6 +34,22 @@ describe('buildContributionGrid', () => {
     expect(cells.filter((cell) => cell.inYear)).toHaveLength(365)
   })
 
+  it('builds rolling year grid from contribution days', () => {
+    const days: ContributionDay[] = [
+      { date: '2025-06-01', count: 1, level: 1 },
+      { date: '2026-06-01', count: 2, level: 2 },
+    ]
+
+    const { cells } = buildContributionGrid(days)
+
+    expect(cells.some((cell) => cell.date === '2025-06-01' && cell.inYear)).toBe(
+      true
+    )
+    expect(cells.some((cell) => cell.date === '2026-06-01' && cell.inYear)).toBe(
+      true
+    )
+  })
+
   it('includes month labels', () => {
     const days: ContributionDay[] = [
       { date: '2026-01-01', count: 0, level: 0 },

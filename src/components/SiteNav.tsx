@@ -1,13 +1,14 @@
 import Link from 'next/link'
 
-export function SiteFooter() {
+export function SiteNav() {
   return (
-    <footer className="site-footer">
-      <div className="wrap">
-        <a className="footer-email" href="mailto:adityasai3230@gmail.com">
-          adityasai3230@gmail.com
-        </a>
-        <div className="footer-links">
+    <header className="site-nav">
+      <div className="wrap site-nav-inner">
+        <Link href="/" className="nav-home">
+          home
+        </Link>
+        <nav className="site-nav-links" aria-label="primary">
+          <Link href="/about">about</Link>
           <a
             href="https://github.com/adityasai1234"
             target="_blank"
@@ -22,9 +23,8 @@ export function SiteFooter() {
           >
             x
           </a>
-          <Link href="/about">about</Link>
-        </div>
+        </nav>
       </div>
-    </footer>
+    </header>
   )
 }

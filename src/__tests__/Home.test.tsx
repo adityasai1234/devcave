@@ -16,6 +16,10 @@ jest.mock('next/link', () => ({
   }) => <a href={href}>{children}</a>,
 }))
 
+beforeAll(() => {
+  HTMLCanvasElement.prototype.getContext = () => null
+})
+
 async function renderHome() {
   render(await Home())
 }
@@ -27,14 +31,14 @@ describe('Home', () => {
     expect(screen.getByText(/yo im aditya/i)).toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
-        name: /getomnism waitlist/i,
+        name: /yo im aditya/i,
       })
     ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'getomnism' })).toHaveAttribute(
+    expect(screen.getAllByText(/research in facial microexpressions/i).length).toBeGreaterThan(0)
+    expect(screen.getByRole('link', { name: 'join waitlist' })).toHaveAttribute(
       'href',
       'https://getomnism.xyz'
     )
-    expect(screen.getByText(/facial microexpressions/i)).toBeInTheDocument()
     expect(screen.getByText(/yc startup school india/i)).toBeInTheDocument()
     expect(screen.getByText(/sf, 2025/i)).toBeInTheDocument()
   })
@@ -42,15 +46,19 @@ describe('Home', () => {
   it('renders contact links', async () => {
     await renderHome()
 
-    expect(screen.getByRole('link', { name: 'aditya@getomnism.xyz' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'adityasai3230@gmail.com' })).toHaveAttribute(
       'href',
-      'mailto:aditya@getomnism.xyz'
+      'mailto:adityasai3230@gmail.com'
     )
-    expect(screen.getByRole('link', { name: 'x.com/vectorspace21' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'email' })).toHaveAttribute(
+      'href',
+      'mailto:adityasai3230@gmail.com'
+    )
+    expect(screen.getAllByRole('link', { name: 'x' })[0]).toHaveAttribute(
       'href',
       'https://x.com/vectorspace21'
     )
-    expect(screen.getByRole('link', { name: 'github.com/adityasai1234' })).toHaveAttribute(
+    expect(screen.getAllByRole('link', { name: 'github' })[0]).toHaveAttribute(
       'href',
       'https://github.com/adityasai1234'
     )
@@ -59,9 +67,10 @@ describe('Home', () => {
   it('renders about link in footer', async () => {
     await renderHome()
 
-    expect(screen.getByRole('link', { name: 'about' })).toHaveAttribute(
-      'href',
-      '/about'
-    )
+    expect(
+      screen.getAllByRole('link', { name: 'about' }).some(
+        (link) => link.getAttribute('href') === '/about'
+      )
+    ).toBe(true)
   })
 })

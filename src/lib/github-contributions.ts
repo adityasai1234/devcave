@@ -5,9 +5,10 @@ export interface ContributionDay {
 }
 
 export interface ContributionCalendar {
-  year: number
   total: number
   days: ContributionDay[]
+  periodLabel: string
+  gridYear?: number
 }
 
 export interface GridCell {
@@ -42,11 +43,12 @@ export function getGithubUsername() {
 
 export async function fetchContributions(
   username: string = USERNAME,
-  year: number = getCurrentContributionYear()
+  period: number | 'last' = 'last'
 ): Promise<ContributionCalendar | null> {
   try {
+    const query = period === 'last' ? 'last' : String(period)
     const response = await fetch(
-      `https://github-contributions-api.jogruber.de/v4/${username}?y=${year}`,
+      `https://github-contributions-api.jogruber.de/v4/${username}?y=${query}`,
       { next: { revalidate: 3600 } }
     )
 
@@ -55,10 +57,19 @@ export async function fetchContributions(
     const data = await response.json()
     const days: ContributionDay[] = data.contributions ?? []
     const total =
-      data.total?.[String(year)] ??
-      days.reduce((sum, day) => sum + day.count, 0)
+      period === 'last'
+        ? data.total?.lastYear
+        : data.total?.[String(period)] ??
+          days.reduce((sum, day) => sum + day.count, 0)
 
-    return { year, total, days }
+    if (total == null) return null
+
+    return {
+      total,
+      days,
+      periodLabel: period === 'last' ? 'the last year' : String(period),
+      gridYear: period === 'last' ? undefined : period,
+    }
   } catch {
     return null
   }
@@ -66,22 +77,32 @@ export async function fetchContributions(
 
 export function buildContributionGrid(
   days: ContributionDay[],
-  year?: number
+  gridYear?: number
 ): ContributionGridData {
   if (days.length === 0) {
     return { cells: [], cols: 0, monthLabels: [] }
   }
 
-  const gridYear = year ?? new Date(days[0].date).getUTCFullYear()
   const dayMap = new Map(days.map((day) => [day.date, day]))
+  const isRollingYear = gridYear === undefined
 
-  const yearStart = new Date(Date.UTC(gridYear, 0, 1))
-  const gridStart = new Date(yearStart)
-  gridStart.setUTCDate(gridStart.getUTCDate() - gridStart.getUTCDay())
+  let gridStart: Date
+  let gridEnd: Date
 
-  const yearEnd = new Date(Date.UTC(gridYear, 11, 31))
-  const gridEnd = new Date(yearEnd)
-  gridEnd.setUTCDate(gridEnd.getUTCDate() + (6 - gridEnd.getUTCDay()))
+  if (isRollingYear) {
+    gridStart = new Date(days[0].date)
+    gridStart.setUTCDate(gridStart.getUTCDate() - gridStart.getUTCDay())
+    gridEnd = new Date(days[days.length - 1].date)
+    gridEnd.setUTCDate(gridEnd.getUTCDate() + (6 - gridEnd.getUTCDay()))
+  } else {
+    const yearStart = new Date(Date.UTC(gridYear, 0, 1))
+    gridStart = new Date(yearStart)
+    gridStart.setUTCDate(gridStart.getUTCDate() - gridStart.getUTCDay())
+
+    const yearEnd = new Date(Date.UTC(gridYear, 11, 31))
+    gridEnd = new Date(yearEnd)
+    gridEnd.setUTCDate(gridEnd.getUTCDate() + (6 - gridEnd.getUTCDay()))
+  }
 
   const cells: GridCell[] = []
   const monthLabels: MonthLabel[] = []
@@ -93,10 +114,12 @@ export function buildContributionGrid(
   while (cursor <= gridEnd) {
     for (let row = 0; row < 7; row++) {
       const dateStr = cursor.toISOString().slice(0, 10)
-      const inYear = cursor.getUTCFullYear() === gridYear
+      const inYear = isRollingYear
+        ? dayMap.has(dateStr)
+        : cursor.getUTCFullYear() === gridYear
       const day = dayMap.get(dateStr)
 
-      if (row === 0 && inYear) {
+      if (row === 0 && (isRollingYear ? dayMap.has(dateStr) : inYear)) {
         const monthKey = `${cursor.getUTCFullYear()}-${cursor.getUTCMonth()}`
         if (!seenMonths.has(monthKey)) {
           seenMonths.add(monthKey)
